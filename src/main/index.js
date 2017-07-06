@@ -1,4 +1,5 @@
-import { app, BrowserWindow } from 'electron'
+import { app, ipcMain, BrowserWindow } from 'electron'
+import { exec } from 'shelljs'
 
 /**
  * Set `__static` path to static files in production
@@ -13,7 +14,7 @@ const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
 
-function createWindow () {
+function createWindow() {
   /**
    * Initial window options
    */
@@ -63,3 +64,10 @@ app.on('ready', () => {
   if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
 })
  */
+
+ipcMain.on('shell-exec', (event, data) => {
+  let { command, reply } = data
+  exec(command, (code, stdout, stderr) => {
+    mainWindow.webContents.send(reply, { command, code, stdout, stderr })
+  })
+})
