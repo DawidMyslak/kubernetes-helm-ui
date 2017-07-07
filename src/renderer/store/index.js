@@ -1,11 +1,49 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import modules from './modules'
-
 Vue.use(Vuex)
 
+const state = {
+  context: null,
+  contexts: [],
+  namespace: 'chat',
+  namespaces: [],
+  releases: []
+}
+
+const mutations = {
+  SET_CONTEXT(state, context) {
+    state.context = context
+  },
+  SET_CONTEXTS(state, contexts) {
+    state.contexts = contexts
+  },
+  SET_NAMESPACES(state, namespaces) {
+    state.namespaces = namespaces
+  },
+  SET_RELEASES(state, releases) {
+    state.releases = releases
+  }
+}
+
+const actions = {
+  setContext({ commit }, context) {
+    commit('SET_CONTEXT', context)
+  },
+  setContexts({ commit }, contexts) {
+    commit('SET_CONTEXTS', contexts)
+  },
+  setNamespaces({ commit }, namespaces) {
+    commit('SET_NAMESPACES', namespaces)
+  },
+  setReleases({ commit }, releases) {
+    commit('SET_RELEASES', releases)
+  }
+}
+
 export default new Vuex.Store({
-  modules,
+  state,
+  mutations,
+  actions,
   strict: process.env.NODE_ENV !== 'production'
 })

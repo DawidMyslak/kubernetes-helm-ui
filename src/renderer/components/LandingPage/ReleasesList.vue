@@ -2,7 +2,7 @@
   <div>
     <div class="title">Releases</div>
     <ol>
-      <li v-for="release in $store.state.Release.items">
+      <li v-for="release in $store.state.releases">
         {{ release.name }}
       </li>
     </ol>

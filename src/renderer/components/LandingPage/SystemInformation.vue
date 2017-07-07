@@ -4,11 +4,34 @@
     <div class="items">
       <div class="item">
         <div class="name">Context:</div>
-        <div class="value">{{ $store.state.Config.context }}</div>
+        <div class="value">{{ $store.state.context }}</div>
       </div>
       <div class="item">
         <div class="name">Namespace:</div>
-        <div class="value">{{ $store.state.Config.namespace }}</div>
+        <div class="value">{{ $store.state.namespace }}</div>
+      </div>
+      <div class="item">
+        <div class="name">Contexts:</div>
+        <div>
+          <br>
+          <ul>
+            <li v-for="context in $store.state.contexts">
+              {{ context.name }} {{ context.current }} {{ context.cluster }} {{ context.authinfo }} {{ context.namespace }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="item">
+        <div class="name">Namespaces:</div>
+        <br>
+        <div>
+          <br>
+          <ul>
+            <li v-for="namespace2 in $store.state.namespaces">
+              {{ namespace2.name }} {{ namespace2.status }} {{ namespace2.age }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
