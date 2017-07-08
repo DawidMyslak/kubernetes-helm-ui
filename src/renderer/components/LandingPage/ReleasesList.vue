@@ -3,7 +3,7 @@
     <div class="title">Releases</div>
     <ol>
       <li v-for="release in $store.state.releases">
-        {{ release.name }}
+        {{ release.name }} ({{ release.revision }}) {{ release.updated }} {{ release.status }}
       </li>
     </ol>
   </div>

@@ -28,7 +28,7 @@ ipcRenderer.on('shell-kubectl-get-namespaces-reply', (event, data) => {
   utils.logReply(data)
   if (data.code === 1) return
 
-  let namespaces = utils.parseKubeData(data.stdout, ['name', 'status', 'age'])
+  let namespaces = utils.parseKubeData(data.stdout, ['name'])
   store.dispatch('setNamespaces', namespaces)
 })
 
@@ -58,6 +58,6 @@ ipcRenderer.on('shell-helm-list-reply', (event, data) => {
   utils.logReply(data)
   if (data.code === 1) return
 
-  let releases = utils.parseHelmData(data.stdout, ['name', 'revision', 'updated', 'status', 'chart', 'namespace'])
+  let releases = utils.parseHelmData(data.stdout, ['name', 'revision', 'updated', 'status'])
   store.dispatch('setReleases', releases)
 })
