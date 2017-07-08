@@ -1,4 +1,3 @@
-import { ipcRenderer } from 'electron'
 import shell from './shell'
 import parsers from './parsers'
 
