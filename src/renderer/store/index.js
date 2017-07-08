@@ -4,17 +4,12 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  context: null,
   contexts: [],
-  namespace: 'chat',
   namespaces: [],
   releases: []
 }
 
 const mutations = {
-  SET_CONTEXT(state, context) {
-    state.context = context
-  },
   SET_CONTEXTS(state, contexts) {
     state.contexts = contexts
   },
@@ -27,9 +22,6 @@ const mutations = {
 }
 
 const actions = {
-  setContext({ commit }, context) {
-    commit('SET_CONTEXT', context)
-  },
   setContexts({ commit }, contexts) {
     commit('SET_CONTEXTS', contexts)
   },

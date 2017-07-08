@@ -1,16 +1,5 @@
 <template>
   <div>
-    <div class="title">Information</div>
-    <div class="items">
-      <div class="item">
-        <div class="name">Context:</div>
-        <div class="value">{{ $store.state.context }}</div>
-      </div>
-      <div class="item">
-        <div class="name">Namespace:</div>
-        <div class="value">{{ $store.state.namespace }}</div>
-      </div>
-    </div>
     <div class="title">Contexts</div>
     <ul>
       <li v-for="item in $store.state.contexts">

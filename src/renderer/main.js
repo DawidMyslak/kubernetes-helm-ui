@@ -4,7 +4,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 
-import './utils/ipc'
+import './utils/loader'
 
 Vue.config.productionTip = false
 

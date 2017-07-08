@@ -1,17 +1,17 @@
 export default {
   parseHelmData(data, keys) {
-    let items = []
+    const items = []
 
-    let lines = data.split(/\r?\n/)
+    const lines = data.split(/\r?\n/)
 
     for (let i = 1; i < lines.length - 1; i++) {
-      let line = lines[i]
-      let values = line.split(/\t/)
-      let item = {}
+      const line = lines[i]
+      const values = line.split(/\t/)
+      const item = {}
 
       for (let j = 0; j < keys.length; j++) {
-        let key = keys[j]
-        let value = values[j].trim()
+        const key = keys[j]
+        const value = values[j].trim()
         item[key] = value
       }
 
@@ -21,16 +21,16 @@ export default {
     return items
   },
   parseKubeData(data, keys) {
-    let items = []
+    const items = []
 
-    let lines = data.split(/\r?\n/)
-    let headerLine = lines[0]
+    const lines = data.split(/\r?\n/)
+    const headerLine = lines[0]
 
-    let headerIndexes = [0]
+    const headerIndexes = [0]
     let spaceFound = false
 
     for (let i = 0; i < headerLine.length; i++) {
-      let char = headerLine[i]
+      const char = headerLine[i]
       if (char === ' ') spaceFound = true
       if (char !== ' ' && spaceFound) {
         headerIndexes.push(i)
@@ -40,17 +40,17 @@ export default {
     headerIndexes.push(headerLine.length)
 
     for (let i = 1; i < lines.length - 1; i++) {
-      let line = lines[i]
-      let values = []
-      let item = {}
+      const line = lines[i]
+      const values = []
+      const item = {}
 
       for (let j = 0; j < headerIndexes.length - 1; j++) {
         values.push(line.slice(headerIndexes[j], headerIndexes[j + 1]).trim())
       }
 
       for (let j = 0; j < keys.length; j++) {
-        let key = keys[j]
-        let value = values[j].trim()
+        const key = keys[j]
+        const value = values[j].trim()
         item[key] = value
       }
 
