@@ -1,5 +1,5 @@
 import { app, ipcMain, BrowserWindow } from 'electron'
-import { exec } from 'shelljs'
+import shell from 'shelljs'
 
 /**
  * Set `__static` path to static files in production
@@ -67,7 +67,7 @@ app.on('ready', () => {
 
 ipcMain.on('shell-exec', (event, data) => {
   let { command, reply } = data
-  exec(command, (code, stdout, stderr) => {
-    mainWindow.webContents.send(reply, { command, code, stdout, stderr })
+  shell.exec(command, (code, stdout, stderr) => {
+    mainWindow.webContents.send(reply, { code, stdout, stderr })
   })
 })

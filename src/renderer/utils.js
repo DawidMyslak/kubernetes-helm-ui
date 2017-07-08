@@ -58,14 +58,5 @@ export default {
     }
 
     return items
-  },
-  logReply(data, logOutput = true) {
-    console.log('> ' + data.command)
-
-    if (data.code === 0) {
-      if (logOutput) console.log(data.stdout)
-    } else {
-      console.log(data.stderr)
-    }
   }
 }
