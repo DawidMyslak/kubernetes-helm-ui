@@ -22,5 +22,12 @@ export default {
         const releases = parsers.parseHelmData(data, ['name', 'revision', 'updated', 'status'])
         return releases
       })
+  },
+  getHistory(release, namespace) {
+    return shell.exec(`helm history ${release} --tiller-namespace ${namespace}`)
+      .then((data) => {
+        const history = parsers.parseHelmData(data, ['name', 'revision', 'updated', 'status'])
+        return history
+      })
   }
 }

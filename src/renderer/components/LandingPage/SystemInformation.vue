@@ -1,5 +1,7 @@
 <template>
   <div>
+    <div class="title">Info</div>
+    {{ $store.state.context.name }} {{ $store.state.namespace.name }}
     <div class="title">Contexts</div>
     <ul>
       <li v-for="item in $store.state.contexts">
