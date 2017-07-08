@@ -10,10 +10,13 @@ export default {
 
       ipcRenderer.once(reply, (event, data) => {
         const { code, stdout, stderr } = data
+        console.log('> ' + command)
         if (code === 0) {
+          console.log(stdout)
           resolve(stdout)
         }
         else {
+          console.log(stderr)
           reject(stderr)
         }
       })

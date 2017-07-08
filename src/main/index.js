@@ -45,6 +45,13 @@ app.on('activate', () => {
   }
 })
 
+ipcMain.on('shell-exec', (event, data) => {
+  let { command, reply } = data
+  shell.exec(command, (code, stdout, stderr) => {
+    mainWindow.webContents.send(reply, { code, stdout, stderr })
+  })
+})
+
 /**
  * Auto Updater
  *
@@ -64,10 +71,3 @@ app.on('ready', () => {
   if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
 })
  */
-
-ipcMain.on('shell-exec', (event, data) => {
-  let { command, reply } = data
-  shell.exec(command, (code, stdout, stderr) => {
-    mainWindow.webContents.send(reply, { code, stdout, stderr })
-  })
-})
