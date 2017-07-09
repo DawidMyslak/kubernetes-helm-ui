@@ -1,49 +1,81 @@
 <template>
   <div id="wrapper">
-    <!--<img id="logo" src="~@/assets/logo.png" alt="electron-vue">-->
     <main>
       <div class="left-side">
         <span class="title">
           Welcome!
         </span>
-        <system-information></system-information>
+        <div>
+          <div class="title">Info</div>
+          {{ context.name }} {{ namespace.name }}
+          <div class="title">Contexts</div>
+          <ul>
+            <li v-for="item in contexts">
+              {{ item.name }} ({{ item.cluster }}) {{ item.current }}
+            </li>
+          </ul>
+          <div class="title">Namespaces</div>
+          <ul>
+            <li v-for="item in namespaces">
+              {{ item.name }}
+            </li>
+          </ul>
+        </div>
       </div>
-  
       <div class="right-side">
-        <releases-list></releases-list>
+        <div>
+          <div class="title">Releases</div>
+          <ol>
+            <li v-for="item in releases">
+              {{ item.name }} ({{ item.revision }}) {{ item.updated }} {{ item.status }}
+            </li>
+          </ol>
+        </div>
       </div>
-  
-      <!--<div class="right-side">
-        <div class="doc">
-          <div class="title">Getting Started</div>
-          <p>
-            electron-vue comes packed with detailed documentation that covers everything from internal configurations, using the project structure, building your application, and so much more.
-          </p>
-          <button @click="open('https://simulatedgreg.gitbooks.io/electron-vue/content/')">Read the Docs</button>
-          <br>
-          <br>
-        </div>
-        <div class="doc">
-          <div class="title alt">Other Documentation</div>
-          <button class="alt" @click="open('https://electron.atom.io/docs/')">Electron</button>
-          <button class="alt" @click="open('https://vuejs.org/v2/guide/')">Vue.js</button>
-        </div>
-      </div>-->
     </main>
   </div>
 </template>
 
 <script>
-import SystemInformation from './LandingPage/SystemInformation'
-import ReleasesList from './LandingPage/ReleasesList'
+import kube from '../tools/kube'
+import helm from '../tools/helm'
 
 export default {
   name: 'landing-page',
-  components: { SystemInformation, ReleasesList },
+  data() {
+    return {
+      context: { name: null },
+      namespace: { name: null },
+      contexts: [],
+      namespaces: [],
+      releases: []
+    }
+  },
   methods: {
     open(link) {
       require('electron').shell.openExternal(link)
+    },
+    loadData() {
+      kube.getContexts()
+        .then((contexts) => {
+          this.contexts = contexts
+          this.context = contexts.find((context) => context.current === '*')
+
+          return kube.getNamespaces()
+        })
+        .then((namespaces) => {
+          this.namespaces = namespaces
+          this.namespace = namespaces[0]
+
+          return helm.getReleases(this.namespace.name)
+        })
+        .then((releases) => {
+          this.releases = releases
+        })
     }
+  },
+  mounted() {
+    this.loadData()
   }
 }
 </script>
@@ -130,5 +162,32 @@ main>div {
 .doc button.alt {
   color: #42b983;
   background-color: transparent;
+}
+
+.title {
+  color: #888;
+  font-size: 18px;
+  font-weight: initial;
+  letter-spacing: .25px;
+  margin-top: 10px;
+}
+
+.items {
+  margin-top: 8px;
+}
+
+.item {
+  display: flex;
+  margin-bottom: 6px;
+}
+
+.item .name {
+  color: #6a6a6a;
+  margin-right: 6px;
+}
+
+.item .value {
+  color: #35495e;
+  font-weight: bold;
 }
 </style>
