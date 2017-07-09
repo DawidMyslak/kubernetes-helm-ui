@@ -2,35 +2,28 @@
   <div id="wrapper">
     <main>
       <div class="left-side">
-        <span class="title">
-          Welcome!
-        </span>
-        <div>
-          <div class="title">Info</div>
-          {{ context.name }} {{ namespace.name }}
-          <div class="title">Contexts</div>
-          <ul>
-            <li v-for="item in contexts">
-              {{ item.name }} ({{ item.cluster }}) {{ item.current }}
-            </li>
-          </ul>
-          <div class="title">Namespaces</div>
-          <ul>
-            <li v-for="item in namespaces">
-              {{ item.name }}
-            </li>
-          </ul>
-        </div>
+        <div class="title">Info</div>
+        {{ context.name }} | {{ namespace.name }}
+        <div class="title">Contexts</div>
+        <select v-model="context" v-on:change="onContextChange">
+          <option v-for="item in contexts" v-bind:value="item">
+            {{ item.name }} ({{ item.cluster }})
+          </option>
+        </select>
+        <div class="title">Namespaces</div>
+        <select v-model="namespace">
+          <option v-for="item in namespaces" v-bind:value="item">
+            {{ item.name }}
+          </option>
+        </select>
       </div>
       <div class="right-side">
-        <div>
-          <div class="title">Releases</div>
-          <ol>
-            <li v-for="item in releases">
-              {{ item.name }} ({{ item.revision }}) {{ item.updated }} {{ item.status }}
-            </li>
-          </ol>
-        </div>
+        <div class="title">Releases</div>
+        <ul>
+          <li v-for="item in releases">
+            {{ item.name }} ({{ item.revision }}) {{ item.updated }} {{ item.status }}
+          </li>
+        </ul>
       </div>
     </main>
   </div>
@@ -52,8 +45,20 @@ export default {
     }
   },
   methods: {
-    open(link) {
-      require('electron').shell.openExternal(link)
+    onContextChange() {
+      kube.useContext(this.context.name)
+        .then(() => {
+          return kube.getNamespaces()
+        })
+        .then((namespaces) => {
+          this.namespaces = namespaces
+          this.namespace = namespaces[0]
+
+          return helm.getReleases(this.namespace.name)
+        })
+        .then((releases) => {
+          this.releases = releases
+        })
     },
     loadData() {
       kube.getContexts()
@@ -102,12 +107,6 @@ body {
   width: 100vw;
 }
 
-#logo {
-  height: auto;
-  margin-bottom: 20px;
-  width: 420px;
-}
-
 main {
   display: flex;
   justify-content: space-between;
@@ -117,15 +116,10 @@ main>div {
   flex-basis: 50%;
 }
 
-.left-side {
+.left-side,
+.right-side {
   display: flex;
   flex-direction: column;
-}
-
-.welcome {
-  color: #555;
-  font-size: 23px;
-  margin-bottom: 10px;
 }
 
 .title {
@@ -135,59 +129,7 @@ main>div {
   margin-bottom: 6px;
 }
 
-.title.alt {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.doc p {
-  color: black;
-  margin-bottom: 10px;
-}
-
-.doc button {
-  font-size: .8em;
-  cursor: pointer;
-  outline: none;
-  padding: 0.75em 2em;
-  border-radius: 2em;
-  display: inline-block;
-  color: #fff;
-  background-color: #4fc08d;
-  transition: all 0.15s ease;
-  box-sizing: border-box;
-  border: 1px solid #4fc08d;
-}
-
-.doc button.alt {
-  color: #42b983;
-  background-color: transparent;
-}
-
-.title {
-  color: #888;
-  font-size: 18px;
-  font-weight: initial;
-  letter-spacing: .25px;
-  margin-top: 10px;
-}
-
-.items {
-  margin-top: 8px;
-}
-
-.item {
-  display: flex;
-  margin-bottom: 6px;
-}
-
-.item .name {
-  color: #6a6a6a;
-  margin-right: 6px;
-}
-
-.item .value {
-  color: #35495e;
-  font-weight: bold;
+ul {
+  font-size: 14px;
 }
 </style>
