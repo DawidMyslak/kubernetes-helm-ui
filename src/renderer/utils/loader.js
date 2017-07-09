@@ -1,14 +1,15 @@
 import store from '../store'
-import data from './data'
+import kube from '../tools/kube'
+import helm from '../tools/helm'
 
-data.getContexts()
+kube.getContexts()
   .then((contexts) => {
     store.dispatch('setContexts', contexts)
 
     const context = contexts.find((context) => context.current === '*')
     store.dispatch('setContext', context)
 
-    return data.getNamespaces()
+    return kube.getNamespaces()
   })
   .then((namespaces) => {
     store.dispatch('setNamespaces', namespaces)
@@ -16,7 +17,7 @@ data.getContexts()
     const namespace = namespaces[0]
     store.dispatch('setNamespace', namespace)
 
-    return data.getReleases(namespace.name)
+    return helm.getReleases(namespace.name)
   })
   .then((releases) => {
     store.dispatch('setReleases', releases)
