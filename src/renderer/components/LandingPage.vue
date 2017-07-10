@@ -3,19 +3,25 @@
     <main>
       <div class="left-side">
         <div class="title">Info</div>
-        {{ context.name }} | {{ namespace.name }}
+        <div>
+          {{ context.name }} | {{ namespace.name }}
+        </div>
         <div class="title">Contexts</div>
-        <select v-model="context" v-on:change="onContextChange">
-          <option v-for="item in contexts" v-bind:value="item">
-            {{ item.name }} ({{ item.cluster }})
-          </option>
-        </select>
+        <div>
+          <select v-model="context" v-on:change="onContextChange">
+            <option v-for="item in contexts" v-bind:value="item">
+              {{ item.name }} ({{ item.cluster }})
+            </option>
+          </select>
+        </div>
         <div class="title">Namespaces</div>
-        <select v-model="namespace" v-on:change="onNamespaceChange">
-          <option v-for="item in namespaces" v-bind:value="item">
-            {{ item.name }}
-          </option>
-        </select>
+        <div>
+          <select v-model="namespace" v-on:change="onNamespaceChange">
+            <option v-for="item in namespaces" v-bind:value="item">
+              {{ item.name }}
+            </option>
+          </select>
+        </div>
       </div>
       <div class="right-side">
         <div class="title">Releases</div>
