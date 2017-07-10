@@ -11,7 +11,7 @@
           </option>
         </select>
         <div class="title">Namespaces</div>
-        <select v-model="namespace">
+        <select v-model="namespace" v-on:change="onNamespaceChange">
           <option v-for="item in namespaces" v-bind:value="item">
             {{ item.name }}
           </option>
@@ -46,6 +46,10 @@ export default {
   },
   methods: {
     onContextChange() {
+      this.namespaces = []
+      this.namespace.name = null
+      this.releases = []
+
       kube.useContext(this.context.name)
         .then(() => {
           return kube.getNamespaces()
@@ -56,6 +60,14 @@ export default {
 
           return helm.getReleases(this.namespace.name)
         })
+        .then((releases) => {
+          this.releases = releases
+        })
+    },
+    onNamespaceChange() {
+      this.releases = []
+
+      helm.getReleases(this.namespace.name)
         .then((releases) => {
           this.releases = releases
         })
