@@ -12,11 +12,11 @@ export default {
   getHistory(release, namespace) {
     return shell.exec(`helm history ${release} --tiller-namespace ${namespace}`)
       .then((data) => {
-        const history = parsers.parseHelmData(data, ['name', 'revision', 'updated', 'status'])
+        const history = parsers.parseHelmData(data, ['revision', 'updated', 'status', 'chart', 'description'])
         return history
       })
-  },
-  rollback(release, revision, namespace) {
-    return shell.exec(`helm rollback ${release} ${revision} --tiller-namespace ${namespace}`)
-  }
+  }//,
+  // rollback(release, revision, namespace) {
+  //   return shell.exec(`helm rollback ${release} ${revision} --tiller-namespace ${namespace}`)
+  // }
 }

@@ -1,38 +1,38 @@
 <template>
   <div id="wrapper">
-    <main>
-      <div class="left-side">
-        <div class="title">Info</div>
-        <div>
-          {{ context.name }} | {{ namespace.name }}
-        </div>
-        <div class="title">Contexts</div>
-        <div>
-          <select v-model="context" v-on:change="onContextChange">
-            <option v-for="item in contexts" v-bind:value="item">
-              {{ item.name }} ({{ item.cluster }})
-            </option>
-          </select>
-        </div>
-        <div class="title">Namespaces</div>
-        <div>
-          <select v-model="namespace" v-on:change="onNamespaceChange">
-            <option v-for="item in namespaces" v-bind:value="item">
-              {{ item.name }}
-            </option>
-          </select>
+  
+    <div id="navigation">
+      <div>
+        Current context: {{ context.name }}
+        <select v-model="context" v-on:change="onContextChange">
+          <option v-for="item in contexts" v-bind:value="item">
+            {{ item.name }} ({{ item.cluster }})
+          </option>
+        </select>
+      </div>
+      <div>
+        Namespace: {{ namespace.name }}
+        <select v-model="namespace" v-on:change="onNamespaceChange">
+          <option v-for="item in namespaces" v-bind:value="item">
+            {{ item.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+  
+    <div id="releases">
+      <div v-for="item in releases" class="release">
+        {{ item.name }} ({{ item.revision }}) {{ item.updated }} {{ item.status }}
+        <button v-on:click="onHistoryRequested(item)">History</button>
+
+        <div v-if="item === release" v-for="subitem in history">
+          ({{ subitem.revision }}) {{ subitem.updated }} {{ subitem.status }} {{ subitem.description }}
         </div>
       </div>
-      <div class="right-side">
-        <div class="title">Releases</div>
-        <ul>
-          <li v-for="item in releases">
-            {{ item.name }} ({{ item.revision }}) {{ item.updated }} {{ item.status }}
-          </li>
-        </ul>
-      </div>
-    </main>
+    </div>
+  
     <div id="console"></div>
+  
   </div>
 </template>
 
@@ -46,9 +46,11 @@ export default {
     return {
       context: { name: null },
       namespace: { name: null },
+      release: { name: null },
       contexts: [],
       namespaces: [],
-      releases: []
+      releases: [],
+      history: []
     }
   },
   methods: {
@@ -79,8 +81,14 @@ export default {
           this.releases = releases
         })
     },
-    onHistory(release) {
+    onHistoryRequested(release) {
+      this.history = []
+      this.release = release
 
+      helm.getHistory(release.name, this.namespace.name)
+        .then((history) => {
+          this.history = history
+        })
     }
   },
   mounted() {
@@ -118,38 +126,16 @@ body {
 }
 
 #wrapper {
-  background: radial-gradient( ellipse at top left,
-  rgba(255, 255, 255, 1) 40%,
-  rgba(229, 229, 229, .9) 100%);
-  height: 100vh;
-  padding: 60px 80px;
   width: 100vw;
+  height: 100vh;
+  padding: 20px;
 }
 
-main {
-  display: flex;
-  justify-content: space-between;
-}
-
-main>div {
-  flex-basis: 50%;
-}
-
-.left-side,
-.right-side {
-  display: flex;
-  flex-direction: column;
-}
-
-.title {
-  color: #2c3e50;
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 6px;
-}
-
-ul {
-  font-size: 14px;
+.release {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 #console {
@@ -161,6 +147,7 @@ ul {
   bottom: 0;
   left: 0px;
   overflow-y: scroll;
+  display: none;
 }
 
 pre {
