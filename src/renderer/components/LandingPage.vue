@@ -32,6 +32,7 @@
         </ul>
       </div>
     </main>
+    <div id="console"></div>
   </div>
 </template>
 
@@ -78,27 +79,27 @@ export default {
           this.releases = releases
         })
     },
-    loadData() {
-      kube.getContexts()
-        .then((contexts) => {
-          this.contexts = contexts
-          this.context = contexts.find((context) => context.current === '*')
+    onHistory(release) {
 
-          return kube.getNamespaces()
-        })
-        .then((namespaces) => {
-          this.namespaces = namespaces
-          this.namespace = namespaces[0]
-
-          return helm.getReleases(this.namespace.name)
-        })
-        .then((releases) => {
-          this.releases = releases
-        })
     }
   },
   mounted() {
-    this.loadData()
+    kube.getContexts()
+      .then((contexts) => {
+        this.contexts = contexts
+        this.context = contexts.find((context) => context.current === '*')
+
+        return kube.getNamespaces()
+      })
+      .then((namespaces) => {
+        this.namespaces = namespaces
+        this.namespace = namespaces[0]
+
+        return helm.getReleases(this.namespace.name)
+      })
+      .then((releases) => {
+        this.releases = releases
+      })
   }
 }
 </script>
@@ -149,5 +150,22 @@ main>div {
 
 ul {
   font-size: 14px;
+}
+
+#console {
+  color: #fff;
+  background-color: #222;
+  position: absolute;
+  width: 100%;
+  height: 300px;
+  bottom: 0;
+  left: 0px;
+  overflow-y: scroll;
+}
+
+pre {
+  font-size: 12px;
+  tab-size: 4;
+  padding: 2px;
 }
 </style>

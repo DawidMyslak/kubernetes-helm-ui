@@ -1,8 +1,16 @@
 import { ipcRenderer } from 'electron'
 import uuid from 'uuid'
 
+function log(message) {
+  console.log(message)
+  let consoleElement = document.getElementById('console')
+  consoleElement.insertAdjacentHTML('beforeend', '<pre>' + message + '</pre>');
+  consoleElement.scrollTop = consoleElement.scrollHeight;
+}
+
 export default {
   exec(command) {
+    log('> ' + command)
     const reply = uuid.v4()
 
     const promise = new Promise((resolve, reject) => {
@@ -10,13 +18,12 @@ export default {
 
       ipcRenderer.once(reply, (event, data) => {
         const { code, stdout, stderr } = data
-        console.log('> ' + command)
         if (code === 0) {
-          console.log(stdout)
+          log(stdout)
           resolve(stdout)
         }
         else {
-          console.log(stderr)
+          log(stderr)
           reject(stderr)
         }
       })
