@@ -1,11 +1,10 @@
 import { ipcRenderer } from 'electron'
 import uuid from 'uuid'
+import store from '../store'
 
-function log(message) {
+const log = (message) => {
   console.log(message)
-  let consoleElement = document.getElementById('console')
-  consoleElement.insertAdjacentHTML('beforeend', '<pre>' + message + '</pre>');
-  consoleElement.scrollTop = consoleElement.scrollHeight;
+  store.dispatch('logMessage', message)
 }
 
 export default {

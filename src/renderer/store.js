@@ -13,7 +13,8 @@ const state = {
   contexts: [],
   namespaces: [],
   releases: [],
-  history: []
+  history: [],
+  logs: []
 }
 
 const mutations = {
@@ -37,6 +38,9 @@ const mutations = {
   },
   SET_HISTORY(state, history) {
     state.history = history
+  },
+  ADD_LOG(state, log) {
+    state.logs.push(log)
   }
 }
 
@@ -84,7 +88,11 @@ const actions = {
       .then((history) => {
         commit('SET_HISTORY', history.reverse())
       })
-  }
+  },
+  logMessage({ commit }, message) {
+    commit('ADD_LOG', message)
+    return Promise.resolve()
+  },
 }
 
 export default new Vuex.Store({
