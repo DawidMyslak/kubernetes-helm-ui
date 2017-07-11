@@ -2,6 +2,7 @@
   <div id="app">
     <router-link to="/releases">Releases</router-link>
     <router-link to="/history">History</router-link>
+    <router-link to="/settings">Settings</router-link>
     <router-link to="/console">Console</router-link>
     <router-view></router-view>
   </div>

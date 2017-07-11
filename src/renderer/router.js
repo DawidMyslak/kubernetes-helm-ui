@@ -16,6 +16,11 @@ export default new Router({
       component: require('@/components/History')
     },
     {
+      path: '/settings',
+      name: 'settings',
+      component: require('@/components/Settings')
+    },
+    {
       path: '/console',
       name: 'console',
       component: require('@/components/Console')
