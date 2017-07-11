@@ -26,8 +26,8 @@
         <button v-on:click="onHistoryRequested(item)">History</button>
   
         <!--<div v-if="item === release" v-for="subitem in history">
-                          ({{ subitem.revision }}) {{ subitem.updated }} {{ subitem.status }} {{ subitem.description }}
-                        </div>-->
+                            ({{ subitem.revision }}) {{ subitem.updated }} {{ subitem.status }} {{ subitem.description }}
+                          </div>-->
       </div>
     </div>
   
@@ -41,13 +41,10 @@ export default {
   name: 'landing-page',
   methods: {
     onHistoryRequested(release) {
-      // this.history = []
-      // this.release = release
-
-      // helm.getHistory(release.name, this.namespace.name)
-      //   .then((history) => {
-      //     this.history = history
-      //   })
+      this.$store.dispatch('applyRelease', release)
+        .then(() => {
+          return this.$store.dispatch('loadHistory')
+        })
     }
   },
   computed: {

@@ -9,9 +9,11 @@ Vue.use(Vuex)
 const state = {
   context: { name: null },
   namespace: { name: null },
+  release: { name: null },
   contexts: [],
   namespaces: [],
-  releases: []
+  releases: [],
+  history: []
 }
 
 const mutations = {
@@ -21,6 +23,9 @@ const mutations = {
   SET_NAMESPACE(state, namespace) {
     state.namespace = namespace
   },
+  SET_RELEASE(state, release) {
+    state.release = release
+  },
   SET_CONTEXTS(state, contexts) {
     state.contexts = contexts
   },
@@ -29,6 +34,9 @@ const mutations = {
   },
   SET_RELEASES(state, releases) {
     state.releases = releases
+  },
+  SET_HISTORY(state, history) {
+    state.history = history
   }
 }
 
@@ -41,6 +49,10 @@ const actions = {
   },
   applyNamespace({ commit }, namespace) {
     commit('SET_NAMESPACE', namespace)
+    return Promise.resolve()
+  },
+  applyRelease({ commit }, release) {
+    commit('SET_RELEASE', release)
     return Promise.resolve()
   },
   loadContexts({ commit }) {
@@ -65,6 +77,12 @@ const actions = {
     return helm.getReleases(state.namespace.name)
       .then((releases) => {
         commit('SET_RELEASES', releases)
+      })
+  },
+  loadHistory({ commit, state }) {
+    return helm.getHistory(state.release.name, state.namespace.name)
+      .then((history) => {
+        commit('SET_HISTORY', history.reverse())
       })
   }
 }
