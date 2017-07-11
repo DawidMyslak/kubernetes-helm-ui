@@ -3,17 +3,17 @@
   
     <div id="navigation">
       <div>
-        Current context: {{ context.name }}
-        <select v-model="context" v-on:change="onContextChange">
-          <option v-for="item in contexts" v-bind:value="item">
+        Current context: {{ $store.state.context.name }}
+        <select v-model="context">
+          <option v-for="item in $store.state.contexts" v-bind:value="item">
             {{ item.name }} ({{ item.cluster }})
           </option>
         </select>
       </div>
       <div>
-        Namespace: {{ namespace.name }}
-        <select v-model="namespace" v-on:change="onNamespaceChange">
-          <option v-for="item in namespaces" v-bind:value="item">
+        Namespace: {{ $store.state.namespace.name }}
+        <select v-model="namespace">
+          <option v-for="item in $store.state.namespaces" v-bind:value="item">
             {{ item.name }}
           </option>
         </select>
@@ -21,13 +21,13 @@
     </div>
   
     <div id="releases">
-      <div v-for="item in releases" class="release">
+      <div v-for="item in $store.state.releases" class="release">
         {{ item.name }} ({{ item.revision }}) {{ item.updated }} {{ item.status }}
         <button v-on:click="onHistoryRequested(item)">History</button>
-
-        <div v-if="item === release" v-for="subitem in history">
-          ({{ subitem.revision }}) {{ subitem.updated }} {{ subitem.status }} {{ subitem.description }}
-        </div>
+  
+        <!--<div v-if="item === release" v-for="subitem in history">
+                          ({{ subitem.revision }}) {{ subitem.updated }} {{ subitem.status }} {{ subitem.description }}
+                        </div>-->
       </div>
     </div>
   
@@ -37,76 +37,53 @@
 </template>
 
 <script>
-import kube from '../tools/kube'
-import helm from '../tools/helm'
-
 export default {
   name: 'landing-page',
-  data() {
-    return {
-      context: { name: null },
-      namespace: { name: null },
-      release: { name: null },
-      contexts: [],
-      namespaces: [],
-      releases: [],
-      history: []
+  methods: {
+    onHistoryRequested(release) {
+      // this.history = []
+      // this.release = release
+
+      // helm.getHistory(release.name, this.namespace.name)
+      //   .then((history) => {
+      //     this.history = history
+      //   })
     }
   },
-  methods: {
-    onContextChange() {
-      this.namespaces = []
-      this.namespace.name = null
-      this.releases = []
-
-      kube.useContext(this.context.name)
-        .then(() => {
-          return kube.getNamespaces()
-        })
-        .then((namespaces) => {
-          this.namespaces = namespaces
-          this.namespace = namespaces[0]
-
-          return helm.getReleases(this.namespace.name)
-        })
-        .then((releases) => {
-          this.releases = releases
-        })
+  computed: {
+    context: {
+      get() {
+        return this.$store.state.context
+      },
+      set(context) {
+        this.$store.dispatch('applyContext', context)
+          .then(() => {
+            return this.$store.dispatch('loadNamespaces')
+          })
+          .then(() => {
+            return this.$store.dispatch('loadReleases')
+          })
+      }
     },
-    onNamespaceChange() {
-      this.releases = []
-
-      helm.getReleases(this.namespace.name)
-        .then((releases) => {
-          this.releases = releases
-        })
-    },
-    onHistoryRequested(release) {
-      this.history = []
-      this.release = release
-
-      helm.getHistory(release.name, this.namespace.name)
-        .then((history) => {
-          this.history = history
-        })
+    namespace: {
+      get() {
+        return this.$store.state.namespace
+      },
+      set(namespace) {
+        this.$store.dispatch('applyNamespace', namespace)
+          .then(() => {
+            return this.$store.dispatch('loadReleases')
+          })
+      }
     }
   },
   mounted() {
-    kube.getContexts()
-      .then((contexts) => {
-        this.contexts = contexts
-        this.context = contexts.find((context) => context.current === '*')
-
-        return kube.getNamespaces()
+    this.$store.dispatch('loadContexts')
+      .then(() => {
+        return this.$store.dispatch('loadNamespaces')
       })
-      .then((namespaces) => {
-        this.namespaces = namespaces
-        this.namespace = namespaces[0]
-
-        return helm.getReleases(this.namespace.name)
-      })
-      .then((releases) => {
-        this.releases = releases
+      .then(() => {
+        return this.$store.dispatch('loadReleases')
       })
   }
 }
