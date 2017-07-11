@@ -15,8 +15,8 @@ export default {
         const history = parsers.parseHelmData(data, ['revision', 'updated', 'status', 'chart', 'description'])
         return history
       })
-  }//,
-  // rollback(release, revision, namespace) {
-  //   return shell.exec(`helm rollback ${release} ${revision} --tiller-namespace ${namespace}`)
-  // }
+  },
+  rollback(release, revision, namespace) {
+    return shell.exec(`helm rollback ${release} ${revision} --tiller-namespace ${namespace}`)
+  }
 }
