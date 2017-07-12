@@ -2,11 +2,11 @@
   <div>
   
     <h1>Releases</h1>
-
+  
     <hr>
   
     <navigation></navigation>
-
+  
     <hr>
   
     <div id="releases">

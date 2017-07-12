@@ -38,7 +38,7 @@ export default {
         kubePath: this.kube,
         helmPath: this.helm
       }
-      
+
       this.$store.dispatch('applyConfig', config)
     }
   }
