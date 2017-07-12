@@ -12,7 +12,7 @@
     <div id="releases">
       <div v-for="item in $store.state.releases" class="item">
         {{ item.name }} ({{ item.revision }}) {{ item.updated }} {{ item.status }}
-        <button v-on:click="onHistoryRequested(item)">History</button>
+        <button v-on:click="showHistory(item)">History</button>
       </div>
     </div>
   
@@ -25,7 +25,7 @@ import Navigation from './Navigation'
 export default {
   components: { Navigation },
   methods: {
-    onHistoryRequested(release) {
+    showHistory(release) {
       this.$store.dispatch('applyRelease', release)
         .then(() => {
           this.$router.push('/history')

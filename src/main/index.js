@@ -46,7 +46,7 @@ app.on('activate', () => {
 
 ipcMain.on('shell-exec', (event, data) => {
   let { command, reply } = data
-  shell.exec('/usr/local/bin/' + command, (code, stdout, stderr) => {
+  shell.exec(command, (code, stdout, stderr) => {
     mainWindow.webContents.send(reply, { code, stdout, stderr })
   })
 })

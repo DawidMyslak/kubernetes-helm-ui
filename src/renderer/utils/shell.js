@@ -2,14 +2,9 @@ import { ipcRenderer } from 'electron'
 import uuid from 'uuid'
 import store from '../store'
 
-const log = (message) => {
-  console.log(message)
-  store.dispatch('logMessage', message)
-}
-
 export default {
   exec(command) {
-    log('> ' + command)
+    store.dispatch('addLog', '> ' + command)
     const reply = uuid.v4()
 
     const promise = new Promise((resolve, reject) => {
@@ -18,11 +13,11 @@ export default {
       ipcRenderer.once(reply, (event, data) => {
         const { code, stdout, stderr } = data
         if (code === 0) {
-          log(stdout)
+          store.dispatch('addLog', stdout)
           resolve(stdout)
         }
         else {
-          log(stderr)
+          store.dispatch('addLog', stderr)
           reject(stderr)
         }
       })

@@ -8,12 +8,16 @@ Vue.use(Vuex)
 
 const state = {
   context: { name: null },
-  namespace: { name: null },
-  release: { name: null },
   contexts: [],
+  namespace: { name: null },
   namespaces: [],
+  release: { name: null },
   releases: [],
   history: [],
+  config: {
+    kubePath: '/usr/local/bin/',
+    helmPath: '/usr/local/bin/'
+  },
   logs: []
 }
 
@@ -23,10 +27,13 @@ const mutations = {
   },
   RESET_CONTEXT_DEPENDENCIES(state) {
     state.namespace.name = null
-    state.release.name = null
     state.namespaces = []
+    state.release.name = null
     state.releases = []
     state.history = []
+  },
+  SET_CONTEXTS(state, contexts) {
+    state.contexts = contexts
   },
   SET_NAMESPACE(state, namespace) {
     state.namespace = namespace
@@ -36,23 +43,23 @@ const mutations = {
     state.releases = []
     state.history = []
   },
+  SET_NAMESPACES(state, namespaces) {
+    state.namespaces = namespaces
+  },
   SET_RELEASE(state, release) {
     state.release = release
   },
   RESET_RELEASE_DEPENDENCIES(state) {
     state.history = []
   },
-  SET_CONTEXTS(state, contexts) {
-    state.contexts = contexts
-  },
-  SET_NAMESPACES(state, namespaces) {
-    state.namespaces = namespaces
-  },
   SET_RELEASES(state, releases) {
     state.releases = releases
   },
   SET_HISTORY(state, history) {
     state.history = history
+  },
+  SET_CONFIG(state, config) {
+    state.config = config
   },
   ADD_LOG(state, log) {
     state.logs.push(log)
@@ -67,16 +74,6 @@ const actions = {
         commit('RESET_CONTEXT_DEPENDENCIES')
       })
   },
-  applyNamespace({ commit }, namespace) {
-    commit('SET_NAMESPACE', namespace)
-    commit('RESET_NAMESPACE_DEPENDENCIES')
-    return Promise.resolve()
-  },
-  applyRelease({ commit }, release) {
-    commit('SET_RELEASE', release)
-    commit('RESET_RELEASE_DEPENDENCIES')
-    return Promise.resolve()
-  },
   loadContexts({ commit }) {
     return kube.getContexts()
       .then((contexts) => {
@@ -86,6 +83,11 @@ const actions = {
         commit('SET_CONTEXT', context)
       })
   },
+  applyNamespace({ commit }, namespace) {
+    commit('SET_NAMESPACE', namespace)
+    commit('RESET_NAMESPACE_DEPENDENCIES')
+    return Promise.resolve()
+  },
   loadNamespaces({ commit }) {
     return kube.getNamespaces()
       .then((namespaces) => {
@@ -94,6 +96,11 @@ const actions = {
         let namespace = namespaces[0]
         commit('SET_NAMESPACE', namespace)
       })
+  },
+  applyRelease({ commit }, release) {
+    commit('SET_RELEASE', release)
+    commit('RESET_RELEASE_DEPENDENCIES')
+    return Promise.resolve()
   },
   loadReleases({ commit, state }) {
     return helm.getReleases(state.namespace.name)
@@ -107,8 +114,12 @@ const actions = {
         commit('SET_HISTORY', history.reverse())
       })
   },
-  logMessage({ commit }, message) {
-    commit('ADD_LOG', message)
+  applyConfig({ commit }, config) {
+    commit('SET_CONFIG', config)
+    return Promise.resolve()
+  },
+  addLog({ commit }, log) {
+    commit('ADD_LOG', log)
     return Promise.resolve()
   }
 }
