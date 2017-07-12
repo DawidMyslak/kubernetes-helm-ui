@@ -1,10 +1,25 @@
 <template>
   <div id="app">
     <div class="menu">
-      <router-link to="/releases">Releases</router-link>
-      <router-link to="/history">History</router-link>
-      <router-link to="/settings">Settings</router-link>
-      <router-link to="/console">Console</router-link>
+      <ul>
+        <li>
+          <router-link to="/releases">Releases</router-link>
+        </li>
+        <li>
+          <router-link to="/history">
+            <img src="~@/assets/history.svg" width="20" height="20">
+            <br>History
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/settings">
+            <img src="~@/assets/settings.svg" width="20" height="20">
+            <br>Settings</router-link>
+        </li>
+        <li>
+          <router-link to="/console">Console</router-link>
+        </li>
+      </ul>
     </div>
     <div class="content">
       <router-view></router-view>
@@ -39,6 +54,24 @@ body {
   height: 100vh;
   background-color: #ccc;
   position: absolute;
+}
+
+.menu ul {
+  list-style-type: none;
+}
+
+.menu li a {
+  width: 100%;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  color: #fff;
+  padding: 10px 0;
+}
+
+.menu li a:hover {
+  background-color: #aaa;
 }
 
 .content {
