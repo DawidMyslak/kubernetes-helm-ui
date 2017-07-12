@@ -21,11 +21,26 @@ const mutations = {
   SET_CONTEXT(state, context) {
     state.context = context
   },
+  RESET_CONTEXT_DEPENDENCIES(state) {
+    state.namespace.name = null
+    state.release.name = null
+    state.namespaces = []
+    state.releases = []
+    state.history = []
+  },
   SET_NAMESPACE(state, namespace) {
     state.namespace = namespace
   },
+  RESET_NAMESPACE_DEPENDENCIES(state) {
+    state.release.name = null
+    state.releases = []
+    state.history = []
+  },
   SET_RELEASE(state, release) {
     state.release = release
+  },
+  RESET_RELEASE_DEPENDENCIES(state) {
+    state.history = []
   },
   SET_CONTEXTS(state, contexts) {
     state.contexts = contexts
@@ -49,14 +64,17 @@ const actions = {
     return kube.useContext(context.name)
       .then(() => {
         commit('SET_CONTEXT', context)
+        commit('RESET_CONTEXT_DEPENDENCIES')
       })
   },
   applyNamespace({ commit }, namespace) {
     commit('SET_NAMESPACE', namespace)
+    commit('RESET_NAMESPACE_DEPENDENCIES')
     return Promise.resolve()
   },
   applyRelease({ commit }, release) {
     commit('SET_RELEASE', release)
+    commit('RESET_RELEASE_DEPENDENCIES')
     return Promise.resolve()
   },
   loadContexts({ commit }) {
@@ -92,7 +110,7 @@ const actions = {
   logMessage({ commit }, message) {
     commit('ADD_LOG', message)
     return Promise.resolve()
-  },
+  }
 }
 
 export default new Vuex.Store({

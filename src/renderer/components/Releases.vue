@@ -2,11 +2,12 @@
   <div>
   
     <h1>Releases</h1>
+
+    <hr>
   
-    <div id="navigation">
-      <div>Current context: {{ $store.state.context.name }}</div>
-      <div>Namespace: {{ $store.state.namespace.name }}</div>
-    </div>
+    <navigation></navigation>
+
+    <hr>
   
     <div id="releases">
       <div v-for="item in $store.state.releases" class="item">
@@ -19,7 +20,10 @@
 </template>
 
 <script>
+import Navigation from './Navigation'
+
 export default {
+  components: { Navigation },
   methods: {
     onHistoryRequested(release) {
       this.$store.dispatch('applyRelease', release)

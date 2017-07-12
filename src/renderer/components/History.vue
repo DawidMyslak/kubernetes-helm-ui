@@ -2,18 +2,20 @@
   <div>
   
     <h1>History</h1>
+
+    <hr>
   
-    <div id="navigation">
-      <div>Current context: {{ $store.state.context.name }}</div>
-      <div>Namespace: {{ $store.state.namespace.name }}</div>
-      <div>
-        Release: {{ $store.state.release.name }}
-        <select v-model="release">
-          <option v-for="item in $store.state.releases" v-bind:value="item">
-            {{ item.name }}
-          </option>
-        </select>
-      </div>
+    <navigation></navigation>
+
+    <hr>
+  
+    <div>
+      Release: {{ $store.state.release.name }}
+      <select v-model="release">
+        <option v-for="item in $store.state.releases" v-bind:value="item">
+          {{ item.name }}
+        </option>
+      </select>
     </div>
   
     <div id="history">
@@ -26,7 +28,10 @@
 </template>
 
 <script>
+import Navigation from './Navigation'
+
 export default {
+  components: { Navigation },
   computed: {
     release: {
       get() {
