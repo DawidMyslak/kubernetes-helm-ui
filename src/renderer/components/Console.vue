@@ -16,7 +16,7 @@ export default {
 .console {
   height: 100%;
   color: #fff;
-  background-color: #000;
+  background-color: #111;
   overflow: scroll;
 }
 
@@ -24,6 +24,6 @@ export default {
   font-family: Menlo, monospace;
   font-size: 11px;
   tab-size: 4;
-  padding: 2px;
+  padding: 2px 4px;
 }
 </style>

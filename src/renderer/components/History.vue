@@ -1,13 +1,7 @@
 <template>
   <div>
-  
-    <h1>History</h1>
-  
-    <hr>
-  
+    
     <navigation></navigation>
-  
-    <hr>
   
     <div>
       Release: {{ $store.state.release.name }}

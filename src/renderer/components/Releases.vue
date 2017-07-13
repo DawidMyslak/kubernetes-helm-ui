@@ -1,13 +1,7 @@
 <template>
   <div>
   
-    <h1>Releases</h1>
-  
-    <hr>
-  
     <navigation></navigation>
-  
-    <hr>
   
     <div id="releases">
       <div v-for="item in $store.state.releases" class="item">

@@ -33,7 +33,7 @@
 .menu {
   width: 80px;
   height: 100vh;
-  background-color: #3bacdf;
+  background-color: #34384b;
   position: absolute;
 }
 
@@ -52,7 +52,7 @@
 }
 
 .menu li a:hover {
-  background-color: #3193c0;
+  background-color: #3193c0; /*3bacdf*/
 }
 
 .icon {

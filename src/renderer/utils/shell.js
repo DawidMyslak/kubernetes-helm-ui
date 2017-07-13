@@ -4,7 +4,7 @@ import store from '../store'
 
 export default {
   exec(command) {
-    store.dispatch('addLog', '> ' + command)
+    store.dispatch('addLog', '➜ ' + command)
     const reply = uuid.v4()
 
     const promise = new Promise((resolve, reject) => {

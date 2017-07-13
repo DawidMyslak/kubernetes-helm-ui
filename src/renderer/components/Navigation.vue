@@ -1,7 +1,5 @@
 <template>
-  <div>
-  
-    <div id="navigation">
+    <div class="navigation">
       <div>
         <div>Current context: {{ $store.state.context.name }}</div>
         <select v-model="context">
@@ -19,8 +17,6 @@
         </select>
       </div>
     </div>
-  
-  </div>
 </template>
 
 <script>
@@ -54,3 +50,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.navigation {
+  background-color: #e0e5e6;
+}
+</style>
