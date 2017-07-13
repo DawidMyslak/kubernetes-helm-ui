@@ -19,7 +19,7 @@
       </label>
     </div>
   
-    <button v-on:click="saveConfig()">Save</button>
+    <button @click="saveConfig()">Save</button>
   
   </div>
 </template>

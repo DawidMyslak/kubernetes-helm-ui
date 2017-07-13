@@ -12,7 +12,7 @@
     <div id="releases">
       <div v-for="item in $store.state.releases" class="item">
         {{ item.name }} ({{ item.revision }}) {{ item.updated }} {{ item.status }}
-        <button v-on:click="showHistory(item)">History</button>
+        <button @click="showHistory(item)">History</button>
       </div>
     </div>
   
