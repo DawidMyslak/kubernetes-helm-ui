@@ -4,25 +4,25 @@
       <li>
         <router-link to="/releases">
           <img src="~@/assets/releases.svg" class="icon">
-          <span class="title">Releases</span>
+          <div class="title">Releases</div>
         </router-link>
       </li>
       <li>
         <router-link to="/history">
           <img src="~@/assets/history.svg" class="icon">
-          <span class="title">History</span>
+          <div class="title">History</div>
         </router-link>
       </li>
       <li>
         <router-link to="/settings">
           <img src="~@/assets/settings.svg" class="icon">
-          <span class="title">Settings</span>
+          <div class="title">Settings</div>
         </router-link>
       </li>
       <li>
         <router-link to="/console">
           <img src="~@/assets/console.svg" class="icon">
-          <span class="title">Console</span>
+          <div class="title">Console</div>
         </router-link>
       </li>
     </ul>

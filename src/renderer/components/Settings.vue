@@ -1,9 +1,25 @@
 <template>
   <div>
   
-    <h1>Settings</h1>
+    <h1>Kubernetes</h1>
   
-    <hr>
+    <div>
+      <select v-model="context">
+        <option v-for="item in $store.state.contexts" v-bind:value="item">
+          {{ item.name }}
+        </option>
+      </select>
+    </div>
+  
+    <div>
+      <select v-model="namespace">
+        <option v-for="item in $store.state.namespaces" v-bind:value="item">
+          {{ item.name }}
+        </option>
+      </select>
+    </div>
+  
+    <h1>Configuration</h1>
   
     <div>
       <label>
@@ -40,6 +56,33 @@ export default {
       }
 
       this.$store.dispatch('applyConfig', config)
+    }
+  },
+  computed: {
+    context: {
+      get() {
+        return this.$store.state.context
+      },
+      set(context) {
+        this.$store.dispatch('applyContext', context)
+          .then(() => {
+            return this.$store.dispatch('loadNamespaces')
+          })
+          .then(() => {
+            return this.$store.dispatch('loadReleases')
+          })
+      }
+    },
+    namespace: {
+      get() {
+        return this.$store.state.namespace
+      },
+      set(namespace) {
+        this.$store.dispatch('applyNamespace', namespace)
+          .then(() => {
+            return this.$store.dispatch('loadReleases')
+          })
+      }
     }
   }
 }

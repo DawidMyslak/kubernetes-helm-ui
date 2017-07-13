@@ -36,13 +36,8 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: #fff;
+  color: #111;
   padding-left: 80px;
   overflow: scroll;
-}
-
-.item {
-  padding: 5px;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
 }
 </style>

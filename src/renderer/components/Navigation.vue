@@ -1,22 +1,14 @@
 <template>
-    <div class="navigation">
-      <div>
-        <div>Current context: {{ $store.state.context.name }}</div>
-        <select v-model="context">
-          <option v-for="item in $store.state.contexts" v-bind:value="item">
-            {{ item.name }} ({{ item.cluster }})
-          </option>
-        </select>
-      </div>
-      <div>
-        <div>Namespace: {{ $store.state.namespace.name }}</div>
-        <select v-model="namespace">
-          <option v-for="item in $store.state.namespaces" v-bind:value="item">
-            {{ item.name }}
-          </option>
-        </select>
-      </div>
+  <div class="navigation">
+    <div class="item">
+      <div class="label">Current context</div>
+      <div class="value">{{ $store.state.context.name }}</div>
     </div>
+    <div class="item">
+      <div class="label">Namespace</div>
+      <div class="value">{{ $store.state.namespace.name }}</div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -53,6 +45,27 @@ export default {
 
 <style scoped>
 .navigation {
+  height: 60px;
   background-color: #e0e5e6;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.item {
+  height: 60px;
+  padding: 13px 30px;
+  border-right: 1px solid #cacecf;
+  float: left;
+}
+
+.label {
+  font-size: 13px;
+  color: #666;
+}
+
+.value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #222;
 }
 </style>

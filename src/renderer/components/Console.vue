@@ -15,7 +15,7 @@ export default {
 <style scoped>
 .console {
   height: 100%;
-  color: #fff;
+  color: #eee;
   background-color: #111;
   overflow: scroll;
 }
