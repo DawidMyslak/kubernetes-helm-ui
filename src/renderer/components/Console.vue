@@ -4,6 +4,14 @@
   </div>
 </template>
 
+<script>
+export default {
+  mounted() {
+    this.$el.scrollTop = this.$el.scrollHeight;
+  }
+}
+</script>
+
 <style scoped>
 .console {
   height: 100%;
