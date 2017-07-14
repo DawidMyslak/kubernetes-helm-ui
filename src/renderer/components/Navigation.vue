@@ -1,8 +1,14 @@
 <template>
   <div class="navigation">
+    <div class="separator">
+      <img src="~@/assets/arrow.svg" class="icon">
+    </div>
     <div class="item">
       <div class="label">Current context</div>
       <div class="value">{{ $store.state.context.name }}</div>
+    </div>
+    <div class="separator">
+      <img src="~@/assets/arrow.svg" class="icon">
     </div>
     <div class="item">
       <div class="label">Namespace</div>
@@ -46,14 +52,25 @@ export default {
 <style scoped>
 .navigation {
   height: 60px;
-  background-color: #e0e5e6;
+  background-color: #e3e6e7;
   margin-bottom: 20px;
   overflow: hidden;
 }
 
+.separator {
+  height: 60px;
+  padding: 20px 0 0 20px;
+  float: left;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
 .item {
   height: 60px;
-  padding: 13px 30px;
+  padding: 13px 30px 0 10px;
   border-right: 1px solid #cacecf;
   float: left;
 }

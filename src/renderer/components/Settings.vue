@@ -1,7 +1,7 @@
 <template>
   <div>
   
-    <h1>Kubernetes</h1>
+    <h1>Kubernetes clusters</h1>
   
     <div>
       <select v-model="context">
@@ -19,7 +19,7 @@
       </select>
     </div>
   
-    <h1>Configuration</h1>
+    <h1>Command line tools</h1>
   
     <div>
       <label>
