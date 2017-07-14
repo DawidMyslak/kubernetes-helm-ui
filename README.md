@@ -1,10 +1,16 @@
-# kubernetes-helm-ui
+# Helm Rollback UI Tool
 
 > An electron-vue project
 
-#### Build Setup
+### Build it yourself
+
+You will need Node.js in version 7 or higher installed on your machine.
 
 ``` bash
+# clone repository
+git clone https://github.com/DawidMyslak/kubernetes-helm-ui.git
+cd kubernetes-helm-ui
+
 # install dependencies
 npm install
 
@@ -13,8 +19,6 @@ npm run dev
 
 # build electron application for production
 npm run build
-
-
 ```
 
 ---
