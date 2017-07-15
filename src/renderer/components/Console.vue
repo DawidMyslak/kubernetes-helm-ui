@@ -25,5 +25,6 @@ export default {
   font-size: 11px;
   tab-size: 4;
   padding: 2px 4px;
+  white-space: pre-wrap;
 }
 </style>
