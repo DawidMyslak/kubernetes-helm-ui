@@ -56,8 +56,8 @@ export default {
 .item {
   margin: 10px;
   padding: 10px 15px;
-  border-radius: 8px;
-  background-color: #edf1f3;
+  border-radius: 4px;
+  border: 1px solid #e3e6e7;
 }
 
 .title {
