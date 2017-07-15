@@ -1,12 +1,12 @@
 <template>
   <div>
-  
+
     <navigation></navigation>
   
-    <div id="releases">
+    <div class="releases">
       <div v-for="item in $store.state.releases" class="item">
-        {{ item.name }} ({{ item.revision }}) {{ item.updated }} {{ item.status }}
-        <button @click="showHistory(item)">History</button>
+        <div class="title"> {{ item.name }}</div> ({{ item.revision }}) {{ item.updated }} {{ item.status }}
+        <button class="button" @click="showHistory(item)">History</button>
       </div>
     </div>
   
@@ -40,3 +40,31 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.item {
+  margin: 10px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-color: #ebeff0;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+ .button {
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  padding: 5px 10px;
+  border-radius: 2em;
+  display: inline-block;
+  color: #fff;
+  background-color: #48bd88;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+  border: 1px solid #48bd88;
+} 
+</style>

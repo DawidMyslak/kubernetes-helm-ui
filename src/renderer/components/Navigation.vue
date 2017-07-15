@@ -53,7 +53,6 @@ export default {
 .navigation {
   height: 60px;
   background-color: #e3e6e7;
-  margin-bottom: 20px;
   overflow: hidden;
 }
 

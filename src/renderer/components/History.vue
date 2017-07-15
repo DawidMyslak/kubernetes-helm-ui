@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+
     <navigation></navigation>
   
     <div>
@@ -12,7 +12,7 @@
       </select>
     </div>
   
-    <div id="history">
+    <div>
       <div v-for="item in $store.state.history" class="item">
         ({{ item.revision }}) {{ item.updated }} {{ item.description }}
       </div>
