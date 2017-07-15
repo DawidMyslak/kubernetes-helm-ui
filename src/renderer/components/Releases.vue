@@ -1,6 +1,6 @@
 <template>
-  <div>
-
+  <div class="wrapper">
+  
     <navigation></navigation>
   
     <div class="releases">
@@ -42,11 +42,22 @@ export default {
 </script>
 
 <style scoped>
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.releases {
+  flex: 1;
+  overflow: scroll;
+}
+
 .item {
   margin: 10px;
   padding: 10px 15px;
   border-radius: 8px;
-  background-color: #ebeff0;
+  background-color: #edf1f3;
 }
 
 .title {
@@ -54,7 +65,7 @@ export default {
   font-weight: bold;
 }
 
- .button {
+.button {
   font-size: 13px;
   cursor: pointer;
   outline: none;
@@ -66,5 +77,5 @@ export default {
   transition: all 0.15s ease;
   box-sizing: border-box;
   border: 1px solid #48bd88;
-} 
+}
 </style>

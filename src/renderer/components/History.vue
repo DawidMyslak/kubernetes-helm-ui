@@ -1,18 +1,18 @@
 <template>
-  <div>
-
+  <div class="wrapper">
+  
     <navigation></navigation>
   
-    <div>
-      Release: {{ $store.state.release.name }}
-      <select v-model="release">
-        <option v-for="item in $store.state.releases" v-bind:value="item">
-          {{ item.name }}
-        </option>
-      </select>
-    </div>
+    <div class="history">
+      <div>
+        Release: {{ $store.state.release.name }}
+        <select v-model="release">
+          <option v-for="item in $store.state.releases" v-bind:value="item">
+            {{ item.name }}
+          </option>
+        </select>
+      </div>
   
-    <div>
       <div v-for="item in $store.state.history" class="item">
         ({{ item.revision }}) {{ item.updated }} {{ item.description }}
       </div>
@@ -41,3 +41,23 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.history {
+  flex: 1;
+  overflow: scroll;
+}
+
+.item {
+  margin: 10px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-color: #edf1f3;
+}
+</style>

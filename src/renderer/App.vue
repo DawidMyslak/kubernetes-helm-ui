@@ -30,14 +30,13 @@ body {
 #app {
   width: 100vw;
   height: 100vh;
+  display: flex;
 }
 
-.content {
-  width: 100vw;
+ .content {
   height: 100vh;
   background-color: #fff;
   color: #111;
-  padding-left: 80px;
-  overflow: scroll;
-}
+  flex: 1;
+} 
 </style>

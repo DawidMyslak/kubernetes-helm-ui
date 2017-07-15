@@ -53,13 +53,12 @@ export default {
 .navigation {
   height: 60px;
   background-color: #e3e6e7;
-  overflow: hidden;
+  display: flex;
 }
 
 .separator {
   height: 60px;
   padding: 20px 0 0 20px;
-  float: left;
 }
 
 .icon {
@@ -71,7 +70,6 @@ export default {
   height: 60px;
   padding: 13px 30px 0 10px;
   border-right: 1px solid #cacecf;
-  float: left;
 }
 
 .label {
