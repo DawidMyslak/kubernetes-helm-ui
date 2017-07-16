@@ -33,7 +33,7 @@
 .menu {
   width: 80px;
   height: 100vh;
-  background-color: #34384b;
+  background: linear-gradient(#464b63, #2b2f44);
 }
 
 .menu ul {
@@ -51,7 +51,7 @@
 }
 
 .menu li a:hover {
-  background-color: #3193c0;
+  background-color: #21253c;
 }
 
 .icon {

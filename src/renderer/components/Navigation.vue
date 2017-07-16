@@ -52,7 +52,8 @@ export default {
 <style scoped>
 .navigation {
   height: 60px;
-  background-color: #e3e6e7;
+  background: linear-gradient(#e9eef0, #dfe3e4);
+  border-bottom: 1px solid #cacecf;
   display: flex;
 }
 
@@ -80,6 +81,5 @@ export default {
 .value {
   font-size: 18px;
   font-weight: bold;
-  color: #222;
 }
 </style>

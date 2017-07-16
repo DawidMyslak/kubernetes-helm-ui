@@ -36,7 +36,7 @@ body {
  .content {
   height: 100vh;
   background-color: #fff;
-  color: #111;
+  color: #222;
   flex: 1;
 } 
 </style>
