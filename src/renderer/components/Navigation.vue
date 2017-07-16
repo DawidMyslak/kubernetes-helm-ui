@@ -52,7 +52,7 @@ export default {
 <style scoped>
 .navigation {
   height: 60px;
-  background: linear-gradient(#e9eef0, #dfe3e4);
+  background: linear-gradient(#e8eff1, #dfe3e4);
   border-bottom: 1px solid #cacecf;
   display: flex;
 }

@@ -5,17 +5,21 @@
   
     <div class="releases">
       <div v-for="item in $store.state.releases" class="item">
-        <div class="item-left">{{ item.revision }}</div>
+        <div class="item-left">
+          <div class="revision">REVISION</div>
+          <div class="revision-number">{{ item.revision }}</div>
+        </div>
         <div class="item-right">
           <div class="info">
-            <div class="title">{{ item.name }}
-              <span class="status">{{ item.status }}</span>
+            <div class="info-header">
+              <div class="title">{{ item.name }}</div>
+              <div class="status">{{ item.status }}</div>
             </div>
             <div class="time">{{ item.updated }}</div>
           </div>
           <div class="actions">
-            <button class="button" @click="showHistory(item)">History</button>
-            <button class="button" @click="showHistory(item)">Rollback</button>
+            <button class="button button-grey" @click="showHistory(item)">History</button>
+            <button class="button button-red" @click="showHistory(item)">Rollback</button>
           </div>
         </div>
       </div>
@@ -72,14 +76,23 @@ export default {
 
 .item-left {
   width: 80px;
-  padding-top: 15px;
+  padding-top: 11px;
   color: #fff;
-  font-size: 26px;
-  font-weight: bold;
-  text-align: center;
   background: linear-gradient(#66c1eb, #3bacdf);
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
+}
+
+.revision-number {
+  font-size: 26px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.revision {
+  color: #d5edf8;
+  text-align: center;
+  font-size: 10px;
 }
 
 .item-right {
@@ -92,6 +105,14 @@ export default {
   display: flex;
 }
 
+.info {
+  flex: 1;
+}
+
+.info-header {
+  display: flex;
+}
+
 .title {
   font-size: 18px;
   font-weight: bold;
@@ -101,9 +122,11 @@ export default {
   font-size: 10px;
   background-color: #48bd88;
   color: #fff;
-  padding: 3px 5px;
+  padding: 2px 4px 0 4px;
   border-radius: 8px;
   font-weight: normal;
+  margin: 3px 0 0 5px;
+  height: 15px;
 }
 
 .time {
@@ -111,28 +134,38 @@ export default {
   color: #888;
 }
 
-.info {
-  flex: 1;
-}
-
 .actions {
   padding-top: 5px;
   text-align: right;
-  width: 200px;
+  width: 180px;
+  display: flex;
 }
 
 .button {
+  width: 80px;
+  height: 30px;
+  margin: 0 0 0 10px;
   font-size: 13px;
   cursor: pointer;
-  padding: 5px 10px;
+  outline: none;
   border-radius: 14px;
-  display: inline-block;
   color: #fff;
-  background-color: #48bd88;
   border: none;
 }
 
-.button:hover {
-  background-color: #359167;
+.button-red {
+  background-color: #cc4b5f;
+}
+
+.button-grey {
+  background-color: #a6abad;
+}
+
+.button-red:hover {
+  background-color: #a83749;
+}
+
+.button-grey:hover {
+  background-color: #82898b;
 }
 </style>

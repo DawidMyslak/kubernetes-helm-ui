@@ -41,7 +41,6 @@
 }
 
 .menu li a {
-  width: 80px;
   display: block;
   text-align: center;
   text-decoration: none;
@@ -61,6 +60,5 @@
 
 .title {
   width: 80px;
-  display: block;
 }
 </style>
