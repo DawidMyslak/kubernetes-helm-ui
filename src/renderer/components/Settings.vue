@@ -92,6 +92,7 @@ export default {
   margin: 10px;
   border: 1px solid #e3e6e7;
   border-radius: 8px;
+  background-color: #f5f8fa;
 }
 
 .section label {

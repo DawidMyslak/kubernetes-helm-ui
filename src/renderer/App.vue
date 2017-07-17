@@ -46,7 +46,7 @@ label {
 
 select {
   padding: 6px 8px;
-  width: 240px;
+  width: 280px;
   border: 1px solid #e3e6e7;
   border-radius: 4px;
   outline: none;
@@ -62,7 +62,7 @@ select {
 
 input {
   padding: 6px 8px;
-  width: 240px;
+  width: 280px;
   border: 1px solid #e3e6e7;
   border-radius: 4px;
   outline: none;

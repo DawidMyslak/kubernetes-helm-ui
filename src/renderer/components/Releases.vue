@@ -137,7 +137,7 @@ export default {
 .actions {
   padding-top: 5px;
   text-align: right;
-  width: 180px;
+  width: 170px;
   display: flex;
 }
 </style>
