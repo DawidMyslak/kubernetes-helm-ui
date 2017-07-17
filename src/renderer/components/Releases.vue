@@ -44,7 +44,7 @@ export default {
     },
     initRollback(release) {
       const revisionToRollback = release.revision - 1
-      const shouldRollback = confirm(`Are you sure you want to rollback to previous revision (${revisionToRollback})?`)
+      const shouldRollback = confirm(`Are you sure you want to rollback ${release.name} to previous revision (${revisionToRollback})?`)
 
       if (shouldRollback) {
         helm.rollback(release.name, revisionToRollback, this.$store.state.namespace.name)
