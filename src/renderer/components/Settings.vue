@@ -1,17 +1,15 @@
 <template>
-  <div>
+  <div class="settings">
   
-    <h1>Kubernetes clusters</h1>
-  
-    <div>
+    <div class="section">
+      <div class="title">Kubernetes cluster</div>
+      <label>Context</label>
       <select v-model="context">
         <option v-for="item in $store.state.contexts" v-bind:value="item">
           {{ item.name }}
         </option>
       </select>
-    </div>
-  
-    <div>
+      <label>Namespace</label>
       <select v-model="namespace">
         <option v-for="item in $store.state.namespaces" v-bind:value="item">
           {{ item.name }}
@@ -19,23 +17,18 @@
       </select>
     </div>
   
-    <h1>Command line tools</h1>
-  
-    <div>
-      <label>
-        kubectl path:
+    <div class="section">
+      <div class="title">Command line tools</div>
+      <div>
+        <label>kubectl path</label>
         <input v-model="kube">
-      </label>
-    </div>
-  
-    <div>
-      <label>
-        helm path:
+      </div>
+      <div>
+        <label>helm path</label>
         <input v-model="helm">
-      </label>
+      </div>
+      <button class="button-green" @click="saveConfig()">Save</button>
     </div>
-  
-    <button @click="saveConfig()">Save</button>
   
   </div>
 </template>
@@ -87,3 +80,30 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.settings {
+  height: 100%;
+  overflow: scroll;
+}
+
+.section {
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid #e3e6e7;
+  border-radius: 8px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.button-green {
+  background-color: #48bd88;
+}
+
+.button-green:hover {
+  background-color: #34966a;
+}
+</style>

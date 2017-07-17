@@ -25,6 +25,48 @@ export default {
 
 body {
   font-family: sans-serif;
+  cursor: default;
+}
+
+button {
+  width: 80px;
+  height: 30px;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  border-radius: 14px;
+  color: #fff;
+  border: none;
+}
+
+label {
+  display: block;
+}
+
+select {
+  padding: 6px 8px;
+  width: 240px;
+  border: 1px solid #e3e6e7;
+  border-radius: 4px;
+  outline: none;
+  color: #222;
+  font-size: 13px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#222'><polygon points='0,0 100,0 50,50'/></svg>") no-repeat;
+  background-size: 8px;
+  background-position: calc(100% - 10px) 12px;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  -webkit-appearance: none;
+}
+
+input {
+  padding: 6px 8px;
+  width: 240px;
+  border: 1px solid #e3e6e7;
+  border-radius: 4px;
+  outline: none;
+  color: #222;
+  font-size: 13px;
 }
 
 #app {
@@ -33,10 +75,10 @@ body {
   display: flex;
 }
 
- .content {
+.content {
   height: 100vh;
   background-color: #fff;
   color: #222;
   flex: 1;
-} 
+}
 </style>
