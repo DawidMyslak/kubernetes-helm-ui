@@ -26,6 +26,7 @@ export default {
 body {
   font-family: sans-serif;
   cursor: default;
+  font-size: 14px;
 }
 
 button {
@@ -80,5 +81,22 @@ input {
   background-color: #fff;
   color: #222;
   flex: 1;
+}
+
+.button-green {
+  background-color: #48bd88;
+}
+
+.button-green:hover {
+  background-color: #34966a;
+}
+
+.button-red {
+  background-color: #cc4b5f;
+  margin: 0 0 0 10px;
+}
+
+.button-red:hover {
+  background-color: #a83749;
 }
 </style>

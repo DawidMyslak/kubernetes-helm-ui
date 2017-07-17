@@ -18,7 +18,7 @@
             <div class="time">{{ item.updated }}</div>
           </div>
           <div class="actions">
-            <button class="button-grey" @click="showHistory(item)">History</button>
+            <button class="button-green" @click="showHistory(item)">History</button>
             <button class="button-red" @click="showHistory(item)">Rollback</button>
           </div>
         </div>
@@ -139,23 +139,5 @@ export default {
   text-align: right;
   width: 180px;
   display: flex;
-}
-
-.button-red {
-  background-color: #cc4b5f;
-  margin: 0 0 0 10px;
-}
-
-.button-grey {
-  background-color: #a6abad;
-  margin: 0 0 0 10px;
-}
-
-.button-red:hover {
-  background-color: #a83749;
-}
-
-.button-grey:hover {
-  background-color: #82898b;
 }
 </style>

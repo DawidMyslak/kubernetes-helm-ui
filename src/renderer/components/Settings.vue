@@ -27,7 +27,7 @@
         <label>helm path</label>
         <input v-model="helm">
       </div>
-      <button class="button-green" @click="saveConfig()">Save</button>
+      <button class="button-green save" @click="saveConfig()">Save</button>
     </div>
   
   </div>
@@ -94,16 +94,16 @@ export default {
   border-radius: 8px;
 }
 
+.section label {
+  margin: 10px 0 2px 0;
+}
+
 .title {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
 }
 
-.button-green {
-  background-color: #48bd88;
-}
-
-.button-green:hover {
-  background-color: #34966a;
+.save {
+  margin-top: 10px;
 }
 </style>

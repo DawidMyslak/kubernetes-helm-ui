@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import * as moment from 'moment'
-
 import kube from './tools/kube'
 import helm from './tools/helm'
 
@@ -55,9 +53,6 @@ const mutations = {
     state.history = []
   },
   SET_RELEASES(state, releases) {
-    releases.forEach((release) => {
-      release.updated = moment(new Date(release.updated)).format('YYYY-MM-DD HH:mm')
-    })
     state.releases = releases
   },
   SET_HISTORY(state, history) {
