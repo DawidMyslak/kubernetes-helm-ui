@@ -61,7 +61,7 @@ export default {
 }
 
 .release {
-  padding: 9px 0 0 10px;
+  padding: 10px 0 0 10px;
   height: 50px;
   background-color: #f5f8fa;
   border-bottom: 1px solid #e3e6e7;

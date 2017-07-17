@@ -19,7 +19,7 @@
           </div>
           <div class="actions">
             <button class="button-green" @click="showHistory(item)">History</button>
-            <button class="button-red" @click="showHistory(item)">Rollback</button>
+            <button class="button-red" @click="initRollback(item)">Rollback</button>
           </div>
         </div>
       </div>
@@ -30,6 +30,7 @@
 
 <script>
 import Navigation from './Navigation'
+import helm from '../tools/helm'
 
 export default {
   components: { Navigation },
@@ -40,6 +41,17 @@ export default {
           this.$router.push('/history')
           return this.$store.dispatch('loadHistory')
         })
+    },
+    initRollback(release) {
+      const revisionToRollback = release.revision - 1
+      const shouldRollback = confirm(`Are you sure you want to rollback to previous revision (${revisionToRollback})?`)
+
+      if (shouldRollback) {
+        helm.rollback(release.name, revisionToRollback, this.$store.state.namespace.name)
+          .then(() => {
+            return this.$store.dispatch('loadReleases')
+          })
+      }
     }
   },
   mounted() {
