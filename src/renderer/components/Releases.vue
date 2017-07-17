@@ -83,16 +83,16 @@ export default {
   border-bottom-left-radius: 4px;
 }
 
-.revision-number {
-  font-size: 26px;
-  font-weight: bold;
-  text-align: center;
-}
-
 .revision {
   color: #d5edf8;
   text-align: center;
   font-size: 10px;
+}
+
+.revision-number {
+  font-size: 26px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .item-right {
@@ -132,6 +132,7 @@ export default {
 .time {
   font-size: 13px;
   color: #888;
+  padding-top: 1px;
 }
 
 .actions {
@@ -139,5 +140,9 @@ export default {
   text-align: right;
   width: 170px;
   display: flex;
+}
+
+.button-red {
+  margin: 0 0 0 10px;
 }
 </style>

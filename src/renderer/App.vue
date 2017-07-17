@@ -93,7 +93,6 @@ input {
 
 .button-red {
   background-color: #cc4b5f;
-  margin: 0 0 0 10px;
 }
 
 .button-red:hover {
