@@ -96,6 +96,7 @@ export default {
 
 .section label {
   margin: 10px 0 2px 0;
+  color: #666;
 }
 
 .title {
