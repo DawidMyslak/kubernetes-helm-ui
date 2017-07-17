@@ -79,7 +79,7 @@ const actions = {
       .then((contexts) => {
         commit('SET_CONTEXTS', contexts)
 
-        let context = contexts.find((context) => context.current === '*')
+        const context = contexts.find((context) => context.current === '*')
         commit('SET_CONTEXT', context)
       })
   },
@@ -93,7 +93,7 @@ const actions = {
       .then((namespaces) => {
         commit('SET_NAMESPACES', namespaces)
 
-        let namespace = namespaces[0]
+        const namespace = namespaces[0]
         commit('SET_NAMESPACE', namespace)
       })
   },
