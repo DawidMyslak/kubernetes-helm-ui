@@ -47,7 +47,7 @@ export default {
       const shouldRollback = confirm(`Are you sure you want to rollback ${release.name} to previous revision (${revisionToRollback})?`)
 
       if (shouldRollback) {
-        helm.rollback(release.name, revisionToRollback, this.$store.state.namespace.name)
+        helm.rollback(release, revisionToRollback)
           .then(() => {
             return this.$store.dispatch('loadReleases')
           })

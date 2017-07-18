@@ -100,14 +100,14 @@ const actions = {
     commit('RESET_RELEASE_DEPENDENCIES')
     return Promise.resolve()
   },
-  loadReleases({ commit, state }) {
-    return helm.getReleases(state.namespace.name)
+  loadReleases({ commit }) {
+    return helm.getReleases()
       .then((releases) => {
         commit('SET_RELEASES', releases)
       })
   },
-  loadHistory({ commit, state }) {
-    return helm.getHistory(state.release.name, state.namespace.name)
+  loadHistory({ commit }) {
+    return helm.getHistory()
       .then((history) => {
         commit('SET_HISTORY', history.reverse())
       })
