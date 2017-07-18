@@ -46,9 +46,6 @@ export default {
       if (shouldRollback) {
         helm.rollback(this.$store.state.release, revisionToRollback)
           .then(() => {
-            return this.$store.dispatch('loadReleases')
-          })
-          .then(() => {
             return this.$store.dispatch('loadHistory')
           })
       }
