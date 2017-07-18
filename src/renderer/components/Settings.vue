@@ -58,12 +58,8 @@ export default {
       },
       set(context) {
         this.$store.dispatch('applyContext', context)
-          .then(() => {
-            return this.$store.dispatch('loadNamespaces')
-          })
-          .then(() => {
-            return this.$store.dispatch('loadReleases')
-          })
+          .then(() => this.$store.dispatch('loadNamespaces'))
+          .then(() => this.$store.dispatch('loadReleases'))
       }
     },
     namespace: {
@@ -72,9 +68,7 @@ export default {
       },
       set(namespace) {
         this.$store.dispatch('applyNamespace', namespace)
-          .then(() => {
-            return this.$store.dispatch('loadReleases')
-          })
+          .then(() => this.$store.dispatch('loadReleases'))
       }
     }
   }

@@ -48,21 +48,15 @@ export default {
 
       if (shouldRollback) {
         helm.rollback(release, revisionToRollback)
-          .then(() => {
-            return this.$store.dispatch('loadReleases')
-          })
+          .then(() => this.$store.dispatch('loadReleases'))
       }
     }
   },
   mounted() {
     if (!this.$store.state.contexts.length) {
       this.$store.dispatch('loadContexts')
-        .then(() => {
-          return this.$store.dispatch('loadNamespaces')
-        })
-        .then(() => {
-          return this.$store.dispatch('loadReleases')
-        })
+        .then(() => this.$store.dispatch('loadNamespaces'))
+        .then(() => this.$store.dispatch('loadReleases'))
     }
   }
 }

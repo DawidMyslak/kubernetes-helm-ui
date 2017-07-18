@@ -65,12 +65,12 @@
   border-right: 4px solid #3bacdf;
 }
 
+.link {
+  width: 80px;
+}
+
 .icon {
   width: 20px;
   height: 20px;
-}
-
-.link {
-  width: 80px;
 }
 </style>

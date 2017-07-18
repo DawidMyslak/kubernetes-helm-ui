@@ -10,7 +10,7 @@
         </option>
       </select>
     </div>
-
+  
     <div class="history">
       <div v-for="item in $store.state.history" class="item">
         <div class="item-left">
@@ -45,9 +45,7 @@ export default {
 
       if (shouldRollback) {
         helm.rollback(this.$store.state.release, revisionToRollback)
-          .then(() => {
-            return this.$store.dispatch('loadHistory')
-          })
+          .then(() => this.$store.dispatch('loadHistory'))
       }
     }
   },
@@ -58,9 +56,7 @@ export default {
       },
       set(release) {
         this.$store.dispatch('applyRelease', release)
-          .then(() => {
-            return this.$store.dispatch('loadHistory')
-          })
+          .then(() => this.$store.dispatch('loadHistory'))
       }
     }
   }
