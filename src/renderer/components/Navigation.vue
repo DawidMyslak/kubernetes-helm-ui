@@ -17,38 +17,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  computed: {
-    context: {
-      get() {
-        return this.$store.state.context
-      },
-      set(context) {
-        this.$store.dispatch('applyContext', context)
-          .then(() => {
-            return this.$store.dispatch('loadNamespaces')
-          })
-          .then(() => {
-            return this.$store.dispatch('loadReleases')
-          })
-      }
-    },
-    namespace: {
-      get() {
-        return this.$store.state.namespace
-      },
-      set(namespace) {
-        this.$store.dispatch('applyNamespace', namespace)
-          .then(() => {
-            return this.$store.dispatch('loadReleases')
-          })
-      }
-    }
-  }
-}
-</script>
-
 <style scoped>
 .navigation {
   height: 60px;
