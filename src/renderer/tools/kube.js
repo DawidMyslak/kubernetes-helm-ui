@@ -10,11 +10,8 @@ export default {
         return contexts
       })
   },
-  useContext(context) {
-    return shell.exec(`${store.state.config.kubePath}kubectl config use-context "${context}"`)
-  },
   getNamespaces() {
-    return shell.exec(`${store.state.config.kubePath}kubectl get namespaces`)
+    return shell.exec(`${store.state.config.kubePath}kubectl get namespaces --context="${store.state.context.name}"`)
       .then((data) => {
         const namespaces = parsers.parseKubeData(data, ['name'])
         return namespaces

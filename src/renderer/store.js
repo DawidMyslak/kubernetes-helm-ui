@@ -68,11 +68,9 @@ const mutations = {
 
 const actions = {
   applyContext({ commit }, context) {
-    return kube.useContext(context.name)
-      .then(() => {
-        commit('SET_CONTEXT', context)
-        commit('RESET_CONTEXT_DEPENDENCIES')
-      })
+      commit('SET_CONTEXT', context)
+      commit('RESET_CONTEXT_DEPENDENCIES')
+      return Promise.resolve()
   },
   loadContexts({ commit }) {
     return kube.getContexts()
