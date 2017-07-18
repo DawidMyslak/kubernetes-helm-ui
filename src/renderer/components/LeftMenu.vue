@@ -2,27 +2,35 @@
   <div class="menu">
     <ul>
       <li>
-        <router-link to="/releases">
-          <img src="~@/assets/releases.svg" class="icon">
-          <div class="title">Releases</div>
+        <router-link to="/releases" exact-active-class="active">
+          <div class="link">
+            <img src="~@/assets/releases.svg" class="icon">
+          </div>
+          <div class="link">Releases</div>
         </router-link>
       </li>
       <li>
-        <router-link to="/history">
-          <img src="~@/assets/history.svg" class="icon">
-          <div class="title">History</div>
+        <router-link to="/history" exact-active-class="active">
+          <div class="link">
+            <img src="~@/assets/history.svg" class="icon">
+          </div>
+          <div class="link">History</div>
         </router-link>
       </li>
       <li>
-        <router-link to="/settings">
-          <img src="~@/assets/settings.svg" class="icon">
-          <div class="title">Settings</div>
+        <router-link to="/settings" exact-active-class="active">
+          <div class="link">
+            <img src="~@/assets/settings.svg" class="icon">
+          </div>
+          <div class="link">Settings</div>
         </router-link>
       </li>
       <li>
-        <router-link to="/console">
-          <img src="~@/assets/console.svg" class="icon">
-          <div class="title">Console</div>
+        <router-link to="/console" exact-active-class="active">
+          <div class="link">
+            <img src="~@/assets/console.svg" class="icon">
+          </div>
+          <div class="link">Console</div>
         </router-link>
       </li>
     </ul>
@@ -53,12 +61,16 @@
   background-color: #21253c;
 }
 
+.active {
+  border-right: 4px solid #3bacdf;
+}
+
 .icon {
   width: 20px;
   height: 20px;
 }
 
-.title {
+.link {
   width: 80px;
 }
 </style>
