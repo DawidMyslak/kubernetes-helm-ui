@@ -31,32 +31,32 @@
 <script>
 import Navigation from './Navigation'
 import helm from '../tools/helm'
+import loader from '../utils/loader'
 
 export default {
   components: { Navigation },
   methods: {
     showHistory(release) {
-      this.$store.dispatch('applyRelease', release)
-        .then(() => {
-          this.$router.push('/history')
-          return this.$store.dispatch('loadHistory')
-        })
+      const promise = () => {
+        return this.$store.dispatch('applyRelease', release)
+          .then(() => {
+            this.$router.push('/history')
+            return this.$store.dispatch('loadHistory')
+          })
+      }
+      loader.wrapPromise(promise)
     },
     initRollback(release) {
       const revisionToRollback = release.revision - 1
       const shouldRollback = confirm(`Are you sure you want to rollback ${release.name} to previous revision (${revisionToRollback})?`)
 
       if (shouldRollback) {
-        helm.rollback(release, revisionToRollback)
-          .then(() => this.$store.dispatch('loadReleases'))
+        const promise = () => {
+          return helm.rollback(release, revisionToRollback)
+            .then(() => this.$store.dispatch('loadReleases'))
+        }
+        loader.wrapPromise(promise)
       }
-    }
-  },
-  mounted() {
-    if (!this.$store.state.contexts.length) {
-      this.$store.dispatch('loadContexts')
-        .then(() => this.$store.dispatch('loadNamespaces'))
-        .then(() => this.$store.dispatch('loadReleases'))
     }
   }
 }

@@ -35,6 +35,7 @@
 <script>
 import Navigation from './Navigation'
 import helm from '../tools/helm'
+import loader from '../utils/loader'
 
 export default {
   components: { Navigation },
@@ -44,8 +45,11 @@ export default {
       const shouldRollback = confirm(`Are you sure you want to rollback ${this.$store.state.release.name} to selected revision (${revisionToRollback})?`)
 
       if (shouldRollback) {
-        helm.rollback(this.$store.state.release, revisionToRollback)
-          .then(() => this.$store.dispatch('loadHistory'))
+        const promise = () => {
+          return helm.rollback(this.$store.state.release, revisionToRollback)
+            .then(() => this.$store.dispatch('loadHistory'))
+        }
+        loader.wrapPromise(promise)
       }
     }
   },
@@ -55,8 +59,11 @@ export default {
         return this.$store.state.release
       },
       set(release) {
-        this.$store.dispatch('applyRelease', release)
-          .then(() => this.$store.dispatch('loadHistory'))
+        const promise = () => {
+          return this.$store.dispatch('applyRelease', release)
+            .then(() => this.$store.dispatch('loadHistory'))
+        }
+        loader.wrapPromise(promise)
       }
     }
   }

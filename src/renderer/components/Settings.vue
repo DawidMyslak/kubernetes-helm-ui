@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import loader from '../utils/loader'
+
 export default {
   data() {
     return {
@@ -47,7 +49,6 @@ export default {
         kubePath: this.kube,
         helmPath: this.helm
       }
-
       this.$store.dispatch('applyConfig', config)
     }
   },
@@ -57,9 +58,12 @@ export default {
         return this.$store.state.context
       },
       set(context) {
-        this.$store.dispatch('applyContext', context)
-          .then(() => this.$store.dispatch('loadNamespaces'))
-          .then(() => this.$store.dispatch('loadReleases'))
+        const promise = () => {
+          return this.$store.dispatch('applyContext', context)
+            .then(() => this.$store.dispatch('loadNamespaces'))
+            .then(() => this.$store.dispatch('loadReleases'))
+        }
+        loader.wrapPromise(promise)
       }
     },
     namespace: {
@@ -67,8 +71,11 @@ export default {
         return this.$store.state.namespace
       },
       set(namespace) {
-        this.$store.dispatch('applyNamespace', namespace)
-          .then(() => this.$store.dispatch('loadReleases'))
+        const promise = () => {
+          return this.$store.dispatch('applyNamespace', namespace)
+            .then(() => this.$store.dispatch('loadReleases'))
+        }
+        loader.wrapPromise(promise)
       }
     }
   }

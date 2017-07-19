@@ -18,7 +18,8 @@ const state = {
     kubePath: '/usr/local/bin/',
     helmPath: '/usr/local/bin/'
   },
-  logs: []
+  logs: [],
+  isLoading: false
 }
 
 const mutations = {
@@ -63,6 +64,9 @@ const mutations = {
   },
   ADD_LOG(state, log) {
     state.logs.push(log)
+  },
+  SET_LOADING(state, isLoading) {
+    state.isLoading = isLoading
   }
 }
 
@@ -118,6 +122,14 @@ const actions = {
   },
   addLog({ commit }, log) {
     commit('ADD_LOG', log)
+    return Promise.resolve()
+  },
+  initLoading({ commit }) {
+    commit('SET_LOADING', true)
+    return Promise.resolve()
+  },
+  finishLoading({ commit }) {
+    commit('SET_LOADING', false)
     return Promise.resolve()
   }
 }

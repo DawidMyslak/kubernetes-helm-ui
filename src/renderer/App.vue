@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <loader></loader>
     <left-menu></left-menu>
     <div class="content">
       <router-view></router-view>
@@ -8,11 +9,12 @@
 </template>
 
 <script>
+import Loader from './components/Loader'
 import LeftMenu from './components/LeftMenu'
 
 export default {
   name: 'kubernetes-helm-ui',
-  components: { LeftMenu }
+  components: { Loader, LeftMenu }
 }
 </script>
 
