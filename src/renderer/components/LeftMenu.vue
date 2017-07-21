@@ -54,7 +54,8 @@
   text-decoration: none;
   font-size: 12px;
   color: #fff;
-  padding: 15px 0;
+  padding-top: 17px;
+  height: 70px;
 }
 
 .menu li a:hover {
