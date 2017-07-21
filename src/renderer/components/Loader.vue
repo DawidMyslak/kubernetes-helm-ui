@@ -1,6 +1,9 @@
 <template>
   <div v-if="$store.state.isLoading" class="loader">
-    <img src="~@/assets/spinner.svg" class="spinner">
+    <div class="spinner-container">
+      <img src="~@/assets/spinner-1.svg" class="spinner-1">
+      <img src="~@/assets/spinner-2.svg" class="spinner-2">
+    </div>
   </div>
 </template>
 
@@ -15,18 +18,41 @@
   justify-content: center;
 }
 
-.spinner {
-  width: 60px;
-  height: 60px;
-  animation: spinner 1s infinite linear;
+.spinner-container {
+  width: 80px;
+  height: 80px;
 }
 
-@keyframes spinner {
+.spinner-1 {
+  width: 50px;
+  height: 50px;
+  margin: 15px;
+  animation: spinner-1 1s infinite linear;
+  position: absolute;
+}
+
+.spinner-2 {
+  width: 80px;
+  height: 80px;
+  animation: spinner-2 1s infinite linear;
+  position: absolute;
+}
+
+@keyframes spinner-1 {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(359deg);
+  }
+}
+
+@keyframes spinner-2 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-359deg);
   }
 }
 </style>
