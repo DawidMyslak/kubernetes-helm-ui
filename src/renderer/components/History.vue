@@ -19,7 +19,10 @@
         </div>
         <div class="item-right">
           <div class="info">
-            <div class="title">{{ item.description }}</div>
+            <div class="info-header">
+              <div class="title">{{ item.description }}</div>
+              <div class="status">{{ item.status }}</div>
+            </div>
             <div class="time">{{ item.updated }}</div>
           </div>
           <div class="actions">
@@ -130,10 +133,25 @@ export default {
   flex: 1;
 }
 
+.info-header {
+  display: flex;
+}
+
 .title {
   font-size: 15px;
   font-weight: bold;
   padding-top: 2px;
+}
+
+.status {
+  font-size: 10px;
+  background-color: #48bd88;
+  color: #fff;
+  padding: 2px 4px 0 4px;
+  border-radius: 8px;
+  font-weight: normal;
+  margin: 3px 0 0 5px;
+  height: 15px;
 }
 
 .time {
