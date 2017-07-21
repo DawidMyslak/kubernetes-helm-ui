@@ -147,4 +147,8 @@ export default {
   width: 170px;
   display: flex;
 }
+
+.button-red {
+  margin: 0 0 0 10px;
+}
 </style>
