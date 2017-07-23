@@ -13,7 +13,7 @@ import Loader from './components/Loader'
 import LeftMenu from './components/LeftMenu'
 
 export default {
-  name: 'kubernetes-helm-ui',
+  name: 'Coolbernetes',
   components: { Loader, LeftMenu }
 }
 </script>
