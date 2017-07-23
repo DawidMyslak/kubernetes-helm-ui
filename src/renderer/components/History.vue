@@ -145,7 +145,7 @@ export default {
 
 .status {
   font-size: 10px;
-  background-color: #d3ce5d;
+  background-color: #c9c458;
   color: #fff;
   padding: 2px 4px 0 4px;
   border-radius: 8px;
