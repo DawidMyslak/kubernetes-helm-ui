@@ -51,6 +51,7 @@ export default {
         const promise = () => {
           return helm.rollback(this.$store.state.release, revisionToRollback)
             .then(() => this.$store.dispatch('loadHistory'))
+            .then(() => this.$store.dispatch('syncReleaseWithHistory'))
         }
         loader.wrapPromise(promise)
       }

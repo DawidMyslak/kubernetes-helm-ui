@@ -25,8 +25,6 @@ const state = {
 const mutations = {
   SET_CONTEXT(state, context) {
     state.context = context
-  },
-  RESET_CONTEXT_DEPENDENCIES(state) {
     state.namespace.name = null
     state.namespaces = []
     state.release.name = null
@@ -38,8 +36,6 @@ const mutations = {
   },
   SET_NAMESPACE(state, namespace) {
     state.namespace = namespace
-  },
-  RESET_NAMESPACE_DEPENDENCIES(state) {
     state.release.name = null
     state.releases = []
     state.history = []
@@ -49,9 +45,16 @@ const mutations = {
   },
   SET_RELEASE(state, release) {
     state.release = release
-  },
-  RESET_RELEASE_DEPENDENCIES(state) {
     state.history = []
+  },
+  RESET_RELEASE(state, release) {
+    state.release.name = null
+    state.history = []
+  },
+  MERGE_RELEASE_WITH_HISTORY(state) {
+    state.release.revision = state.history[0].revision
+    state.release.status = state.history[0].status
+    state.release.updated = state.history[0].updated
   },
   SET_RELEASES(state, releases) {
     state.releases = releases
@@ -72,9 +75,8 @@ const mutations = {
 
 const actions = {
   applyContext({ commit }, context) {
-      commit('SET_CONTEXT', context)
-      commit('RESET_CONTEXT_DEPENDENCIES')
-      return Promise.resolve()
+    commit('SET_CONTEXT', context)
+    return Promise.resolve()
   },
   loadContexts({ commit }) {
     return kube.getContexts()
@@ -87,7 +89,6 @@ const actions = {
   },
   applyNamespace({ commit }, namespace) {
     commit('SET_NAMESPACE', namespace)
-    commit('RESET_NAMESPACE_DEPENDENCIES')
     return Promise.resolve()
   },
   loadNamespaces({ commit }) {
@@ -101,13 +102,17 @@ const actions = {
   },
   applyRelease({ commit }, release) {
     commit('SET_RELEASE', release)
-    commit('RESET_RELEASE_DEPENDENCIES')
+    return Promise.resolve()
+  },
+  syncReleaseWithHistory({ commit }) {
+    commit('MERGE_RELEASE_WITH_HISTORY')
     return Promise.resolve()
   },
   loadReleases({ commit }) {
     return helm.getReleases()
       .then((releases) => {
         commit('SET_RELEASES', releases)
+        commit('RESET_RELEASE')
       })
   },
   loadHistory({ commit }) {

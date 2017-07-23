@@ -49,7 +49,13 @@ export default {
         kubePath: this.kube,
         helmPath: this.helm
       }
-      this.$store.dispatch('applyConfig', config)
+      const promise = () => {
+        return this.$store.dispatch('applyConfig', config)
+          .then(() => this.$store.dispatch('loadContexts'))
+          .then(() => this.$store.dispatch('loadNamespaces'))
+          .then(() => this.$store.dispatch('loadReleases'))
+      }
+      loader.wrapPromise(promise)
     }
   },
   computed: {
