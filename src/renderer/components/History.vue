@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
   
-    <navigation></navigation>
+    <navigation type="history"></navigation>
   
     <div class="release">
       <select v-model="release">

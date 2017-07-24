@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
   
-    <navigation></navigation>
+    <navigation type="releases"></navigation>
   
     <div class="releases">
       <div v-for="item in $store.state.releases" class="item">
