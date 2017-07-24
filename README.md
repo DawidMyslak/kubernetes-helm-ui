@@ -1,8 +1,9 @@
-# Helm Rollback UI Tool
+# Coolbernetes
 
-> An electron-vue project
+Coolbernetes provides UI layer that helps interacting with command line tools like `kubectl` and `helm`.
+You can rollback your apps now by simply clicking a button.
 
-### Build it yourself
+## Build it yourself
 
 You will need Node.js in version 7 or higher installed on your machine.
 
