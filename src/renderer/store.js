@@ -122,7 +122,15 @@ const actions = {
       })
   },
   applyConfig({ commit }, config) {
+    window.localStorage.setItem('config', JSON.stringify(config))
     commit('SET_CONFIG', config)
+    return Promise.resolve()
+  },
+  loadConfig({ commit }) {
+    const config = JSON.parse(window.localStorage.getItem('config'))
+    if (config) {
+      commit('SET_CONFIG', config)
+    }
     return Promise.resolve()
   },
   addLog({ commit }, log) {

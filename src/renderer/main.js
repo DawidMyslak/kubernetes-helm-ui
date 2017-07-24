@@ -8,7 +8,8 @@ import loader from './utils/loader'
 Vue.config.productionTip = false
 
 const promise = () => {
-  return store.dispatch('loadContexts')
+  return store.dispatch('loadConfig')
+    .then(() => store.dispatch('loadContexts'))
     .then(() => store.dispatch('loadNamespaces'))
     .then(() => store.dispatch('loadReleases'))
 }
