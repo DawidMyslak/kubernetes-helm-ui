@@ -9,7 +9,7 @@ export default {
         return store.dispatch('finishLoading')
           .then(() => {
             if (err) {
-              alert('An error occurred. Please check the console for more details.')
+              setTimeout(() => { alert('An error occurred. Please check the console for more details.') }, 100)
             }
           })
       })

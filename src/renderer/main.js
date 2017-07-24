@@ -7,7 +7,6 @@ import loader from './utils/loader'
 
 Vue.config.productionTip = false
 
-/* load basic app data */
 const promise = () => {
   return store.dispatch('loadContexts')
     .then(() => store.dispatch('loadNamespaces'))
