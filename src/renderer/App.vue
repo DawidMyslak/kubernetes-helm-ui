@@ -29,6 +29,7 @@ body {
   font-family: sans-serif;
   cursor: default;
   font-size: 14px;
+  user-select: none;
 }
 
 button {
