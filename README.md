@@ -1,7 +1,22 @@
 # Coolbernetes
 
+<div align="center">
+<img
+width="128" src="http://dawid.myslak.me/coolbernetes/icon.png" alt="colbernetes icon">
+</div>
+
 Coolbernetes provides UI layer that helps interacting with command line tools like `kubectl` and `helm`.
 You can rollback your apps now by simply clicking a button.
+
+<div align="center">
+<img
+src="http://dawid.myslak.me/coolbernetes/screenshot.png" alt="colbernetes screenshot"
+border="1">
+</div>
+
+## Download
+
+*to be done...*
 
 ## Build it yourself
 
