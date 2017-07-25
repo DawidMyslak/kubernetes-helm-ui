@@ -18,7 +18,6 @@ export default {
   color: #eee;
   background-color: #111;
   overflow: scroll;
-  user-select: auto;
 }
 
 .console pre {
