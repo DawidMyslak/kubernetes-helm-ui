@@ -5,11 +5,12 @@
 width="128" src="http://dawid.myslak.me/coolbernetes/icon.png" alt="colbernetes icon">
 </div>
 
-Coolbernetes provides UI layer that helps interacting with command line tools like `kubectl` and `helm`.
+> Coolbernetes provides UI layer that helps interacting with command line tools like `kubectl` and `helm`.
 You can rollback your apps now by simply clicking a button.
 
 <div align="center">
 <img
+width="800" 
 src="http://dawid.myslak.me/coolbernetes/screenshot.png" alt="colbernetes screenshot">
 </div>
 
@@ -30,10 +31,7 @@ cd kubernetes-helm-ui
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:9080
-npm run dev
-
-# build electron application for production
+# build application
 npm run build
 ```
 
