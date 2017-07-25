@@ -10,13 +10,13 @@ You can rollback your apps now by simply clicking a button.
 
 <div align="center">
 <img
-src="http://dawid.myslak.me/coolbernetes/screenshot.png" alt="colbernetes screenshot"
-border="1">
+src="http://dawid.myslak.me/coolbernetes/screenshot.png" alt="colbernetes screenshot">
 </div>
 
 ## Download
 
-*to be done...*
+* [macOS: Coolbernetes-1.0.0.dmg](http://dawid.myslak.me/coolbernetes/Coolbernetes-1.0.0.dmg)
+* [macOS: Coolbernetes-1.0.0-mac.zip](http://dawid.myslak.me/coolbernetes/Coolbernetes-1.0.0-mac.zip)
 
 ## Build it yourself
 
