@@ -64,6 +64,8 @@ export default {
         return this.$store.state.context
       },
       set(context) {
+        if (this.$store.state.isLoading) return
+
         const promise = () => {
           return this.$store.dispatch('applyContext', context)
             .then(() => this.$store.dispatch('loadNamespaces'))
@@ -77,6 +79,8 @@ export default {
         return this.$store.state.namespace
       },
       set(namespace) {
+        if (this.$store.state.isLoading) return
+        
         const promise = () => {
           return this.$store.dispatch('applyNamespace', namespace)
             .then(() => this.$store.dispatch('loadReleases'))

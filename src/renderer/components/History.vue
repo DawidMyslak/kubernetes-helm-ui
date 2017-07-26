@@ -63,6 +63,8 @@ export default {
         return this.$store.state.release
       },
       set(release) {
+        if (this.$store.state.isLoading) return
+        
         const promise = () => {
           return this.$store.dispatch('applyRelease', release)
             .then(() => this.$store.dispatch('loadHistory'))
