@@ -1,5 +1,5 @@
-import { app, ipcMain, BrowserWindow } from 'electron'
-import shell from 'shelljs'
+import { app, shell, ipcMain, BrowserWindow, Menu } from 'electron'
+import { exec } from 'shelljs'
 
 /**
  * Set `__static` path to static files in production
@@ -30,6 +30,27 @@ function createWindow() {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+
+  const template = [
+    {
+      label: "Coolbernetes",
+      submenu: [
+        { label: "Check For Updates (v1.0.1)", click: () => { shell.openExternal('https://github.com/DawidMyslak/kubernetes-helm-ui/releases') } },
+        { type: "separator" },
+        { label: "Quit", accelerator: "Command+Q", click: () => { app.quit() } }
+      ]
+    },
+    {
+      label: "Edit",
+      submenu: [
+        { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
+        { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
+      ]
+    }
+  ]
+
+  const menu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(menu)
 }
 
 app.on('ready', createWindow)
@@ -48,7 +69,7 @@ app.on('activate', () => {
 
 ipcMain.on('shell-exec', (event, data) => {
   let { command, reply } = data
-  shell.exec(command, (code, stdout, stderr) => {
+  exec(command, (code, stdout, stderr) => {
     mainWindow.webContents.send(reply, { code, stdout, stderr })
   })
 })

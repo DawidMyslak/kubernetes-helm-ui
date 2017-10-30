@@ -16,8 +16,8 @@ src="http://dawid.myslak.me/coolbernetes/screenshot.png" alt="colbernetes screen
 
 ## Download
 
-* [macOS: Coolbernetes-1.0.0.dmg](http://dawid.myslak.me/coolbernetes/Coolbernetes-1.0.0.dmg)
-* [macOS: Coolbernetes-1.0.0-mac.zip](http://dawid.myslak.me/coolbernetes/Coolbernetes-1.0.0-mac.zip)
+* [macOS: Coolbernetes-1.0.1.dmg](http://dawid.myslak.me/coolbernetes/Coolbernetes-1.0.1.dmg)
+* [macOS: Coolbernetes-1.0.1-mac.zip](http://dawid.myslak.me/coolbernetes/Coolbernetes-1.0.1-mac.zip)
 
 ## Build it yourself
 
