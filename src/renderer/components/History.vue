@@ -5,14 +5,14 @@
   
     <div class="release">
       <select v-model="release">
-        <option v-for="item in $store.state.releases" v-bind:value="item">
+        <option v-for="(item, index) in $store.state.releases" :value="item" :key="index">
           {{ item.name }}
         </option>
       </select>
     </div>
   
     <div class="history">
-      <div v-for="item in $store.state.history" class="item">
+      <div class="item" v-for="(item, index) in $store.state.history" :key="index">
         <div class="item-left">
           <div class="revision">REVISION</div>
           <div class="revision-number">{{ item.revision }}</div>

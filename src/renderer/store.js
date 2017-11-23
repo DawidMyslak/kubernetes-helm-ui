@@ -13,6 +13,7 @@ const state = {
   namespaces: [],
   release: { name: null },
   releases: [],
+  deployments: [],
   history: [],
   config: {
     kubePath: '/usr/local/bin/',
@@ -29,6 +30,7 @@ const mutations = {
     state.namespaces = []
     state.release.name = null
     state.releases = []
+    state.deployments = []
     state.history = []
   },
   SET_CONTEXTS(state, contexts) {
@@ -38,6 +40,7 @@ const mutations = {
     state.namespace = namespace
     state.release.name = null
     state.releases = []
+    state.deployments = []
     state.history = []
   },
   SET_NAMESPACES(state, namespaces) {
@@ -58,6 +61,9 @@ const mutations = {
   },
   SET_RELEASES(state, releases) {
     state.releases = releases
+  },
+  SET_DEPLOYMENTS(state, deployments) {
+    state.deployments = deployments
   },
   SET_HISTORY(state, history) {
     state.history = history
@@ -108,11 +114,15 @@ const actions = {
     commit('MERGE_RELEASE_WITH_HISTORY')
     return Promise.resolve()
   },
-  loadReleases({ commit }) {
+  loadReleasesAndDeployments({ commit }) {
     return helm.getReleases()
       .then((releases) => {
         commit('SET_RELEASES', releases)
         commit('RESET_RELEASE')
+        return kube.getDeployments()
+      })
+      .then((deployments) => {
+        commit('SET_DEPLOYMENTS', deployments)
       })
   },
   loadHistory({ commit }) {
@@ -147,9 +157,47 @@ const actions = {
   }
 }
 
+const getters = {
+  getReleasesWithExtras(state) {
+    return state.releases.map((release) => {
+      let deployment = null
+      let github = null
+
+      deployment = state.deployments.find((deployment) => {
+        const selector = deployment.selector.split(',')
+          .map((item) => item.split('='))
+          .reduce((accumulator, item) => {
+            accumulator[item[0]] = item[1]
+            return accumulator
+          }, {}) || {}
+
+        if (selector.release) {
+          return release.name === selector.release
+        }
+
+        return release.name === selector.app
+      })
+
+      if (deployment) {
+        const image = deployment.image.split(':')
+        if (image.length === 2 && image[0].includes('/')) {
+          github = {
+            repository: image[0],
+            shortCommit: image[1].slice(0, 7),
+            commit: image[1]
+          }
+        }
+      }
+
+      return { release, deployment, github }
+    })
+  }
+}
+
 export default new Vuex.Store({
   state,
   mutations,
   actions,
+  getters,
   strict: process.env.NODE_ENV !== 'production'
 })

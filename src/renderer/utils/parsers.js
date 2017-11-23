@@ -26,6 +26,12 @@ export default {
     const lines = data.split(/\r?\n/)
     const headerLine = lines[0]
 
+    let longestLine = headerLine
+    for (let i = 1; i < lines.length - 1; i++) {
+      const line = lines[i]
+      if (line.length > longestLine.length) longestLine = line
+    }
+
     const headerIndexes = [0]
     let spaceFound = false
 
@@ -37,7 +43,7 @@ export default {
         spaceFound = false
       }
     }
-    headerIndexes.push(headerLine.length)
+    headerIndexes.push(longestLine.length)
 
     for (let i = 1; i < lines.length - 1; i++) {
       const line = lines[i]

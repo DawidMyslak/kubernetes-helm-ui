@@ -5,13 +5,13 @@
       <div class="title">Kubernetes cluster</div>
       <label>Context</label>
       <select v-model="context">
-        <option v-for="item in $store.state.contexts" v-bind:value="item">
+        <option v-for="(item, index) in $store.state.contexts" :value="item" :key="index">
           {{ item.name }}
         </option>
       </select>
       <label>Namespace</label>
       <select v-model="namespace">
-        <option v-for="item in $store.state.namespaces" v-bind:value="item">
+        <option v-for="(item, index) in $store.state.namespaces" :value="item" :key="index">
           {{ item.name }}
         </option>
       </select>
@@ -53,7 +53,7 @@ export default {
         return this.$store.dispatch('applyConfig', config)
           .then(() => this.$store.dispatch('loadContexts'))
           .then(() => this.$store.dispatch('loadNamespaces'))
-          .then(() => this.$store.dispatch('loadReleases'))
+          .then(() => this.$store.dispatch('loadReleasesAndDeployments'))
       }
       loader.wrapPromise(promise)
     }
@@ -69,7 +69,7 @@ export default {
         const promise = () => {
           return this.$store.dispatch('applyContext', context)
             .then(() => this.$store.dispatch('loadNamespaces'))
-            .then(() => this.$store.dispatch('loadReleases'))
+            .then(() => this.$store.dispatch('loadReleasesAndDeployments'))
         }
         loader.wrapPromise(promise)
       }
@@ -83,7 +83,7 @@ export default {
         
         const promise = () => {
           return this.$store.dispatch('applyNamespace', namespace)
-            .then(() => this.$store.dispatch('loadReleases'))
+            .then(() => this.$store.dispatch('loadReleasesAndDeployments'))
         }
         loader.wrapPromise(promise)
       }
