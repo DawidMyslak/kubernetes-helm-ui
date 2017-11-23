@@ -13,6 +13,7 @@ const state = {
   namespaces: [],
   release: { name: null },
   releases: [],
+  deployments: [],
   history: [],
   config: {
     kubePath: '/usr/local/bin/',
@@ -29,6 +30,7 @@ const mutations = {
     state.namespaces = []
     state.release.name = null
     state.releases = []
+    state.deployments = []
     state.history = []
   },
   SET_CONTEXTS(state, contexts) {
@@ -38,6 +40,7 @@ const mutations = {
     state.namespace = namespace
     state.release.name = null
     state.releases = []
+    state.deployments = []
     state.history = []
   },
   SET_NAMESPACES(state, namespaces) {
@@ -58,6 +61,9 @@ const mutations = {
   },
   SET_RELEASES(state, releases) {
     state.releases = releases
+  },
+  SET_DEPLOYMENTS(state, deployments) {
+    state.deployments = deployments
   },
   SET_HISTORY(state, history) {
     state.history = history
@@ -108,11 +114,15 @@ const actions = {
     commit('MERGE_RELEASE_WITH_HISTORY')
     return Promise.resolve()
   },
-  loadReleases({ commit }) {
+  loadReleasesAndDeployments({ commit }) {
     return helm.getReleases()
       .then((releases) => {
         commit('SET_RELEASES', releases)
         commit('RESET_RELEASE')
+        return kube.getDeployments()
+      })
+      .then((deployments) => {
+        commit('SET_DEPLOYMENTS', deployments)
       })
   },
   loadHistory({ commit }) {

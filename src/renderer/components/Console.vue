@@ -1,6 +1,6 @@
 <template>
   <div class="console">
-    <pre v-for="item in $store.state.logs">{{item}}</pre>
+    <pre v-for="(item, index) in $store.state.logs" :key="index">{{item}}</pre>
   </div>
 </template>
 

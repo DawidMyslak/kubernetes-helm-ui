@@ -11,7 +11,7 @@ const promise = () => {
   return store.dispatch('loadConfig')
     .then(() => store.dispatch('loadContexts'))
     .then(() => store.dispatch('loadNamespaces'))
-    .then(() => store.dispatch('loadReleases'))
+    .then(() => store.dispatch('loadReleasesAndDeployments'))
 }
 loader.wrapPromise(promise)
 

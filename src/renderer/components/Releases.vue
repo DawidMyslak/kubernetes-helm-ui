@@ -4,7 +4,7 @@
     <navigation type="releases"></navigation>
   
     <div class="releases">
-      <div v-for="item in $store.state.releases" class="item">
+      <div class="item" v-for="(item, index) in $store.state.releases" :key="index">
         <div class="item-left">
           <div class="revision">REVISION</div>
           <div class="revision-number">{{ item.revision }}</div>
@@ -53,7 +53,7 @@ export default {
       if (shouldRollback) {
         const promise = () => {
           return helm.rollback(release, revisionToRollback)
-            .then(() => this.$store.dispatch('loadReleases'))
+            .then(() => this.$store.dispatch('loadReleasesAndDeployments'))
         }
         loader.wrapPromise(promise)
       }

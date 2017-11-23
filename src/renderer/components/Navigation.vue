@@ -34,7 +34,7 @@ export default {
     refresh() {
       if (this.type === 'releases') {
         const promise = () => {
-          return this.$store.dispatch('loadReleases')
+          return this.$store.dispatch('loadReleasesAndDeployments')
         }
         loader.wrapPromise(promise)
       }
