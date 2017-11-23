@@ -158,7 +158,7 @@ const actions = {
 }
 
 const getters = {
-  getReleases(state) {
+  getReleasesWithExtras(state) {
     return state.releases.map((release) => {
       let deployment = null
       let github = null
@@ -189,7 +189,7 @@ const getters = {
         }
       }
 
-      return { ...release, deployment, github }
+      return { release, deployment, github }
     })
   }
 }

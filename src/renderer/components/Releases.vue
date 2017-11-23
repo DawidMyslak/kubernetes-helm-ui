@@ -4,19 +4,19 @@
     <navigation type="releases"></navigation>
   
     <div class="releases">
-      <div class="item" v-for="(item, index) in $store.getters.getReleases" :key="index">
+      <div class="item" v-for="(item, index) in $store.getters.getReleasesWithExtras" :key="index">
         <div class="item-left">
           <div class="revision">REVISION</div>
-          <div class="revision-number">{{ item.revision }}</div>
+          <div class="revision-number">{{ item.release.revision }}</div>
         </div>
         <div class="item-right">
           <div class="info">
             <div class="info-header">
-              <div class="title">{{ item.name }}</div>
-              <div class="status status-orange">{{ item.status }}</div>
+              <div class="title">{{ item.release.name }}</div>
+              <div class="status status-orange">{{ item.release.status }}</div>
               <div class="status status-grey" v-if="item.deployment">{{ item.deployment.current }} PODS RUNNING</div>
             </div>
-            <div class="time">{{ item.updated }}</div>
+            <div class="time">{{ item.release.updated }}</div>
             <div class="github">
               <img src="~@/assets/github.svg" class="icon">
               <span v-if="item.github" class="repository"><a :href="'https://github.com/' + item.github.repository">{{ item.github.repository }}</a></span>
@@ -25,8 +25,8 @@
             </div>
           </div>
           <div class="actions">
-            <button class="button-green" @click="showHistory(item)">History</button>
-            <button class="button-red" @click="initRollback(item)">Rollback</button>
+            <button class="button-green" @click="showHistory(item.release)">History</button>
+            <button class="button-red" @click="initRollback(item.release)">Rollback</button>
           </div>
         </div>
       </div>
@@ -172,7 +172,9 @@ export default {
   text-decoration: underline;
 }
 
-.github img {
+.icon {
+  width: 16px;
+  height: 16px;
   margin-right: 2px;
 }
 
@@ -183,11 +185,6 @@ export default {
 .commit {
   font-family: Menlo, monospace;
   font-size: 11px;
-}
-
-.icon {
-  width: 16px;
-  height: 16px;
 }
 
 .actions {
