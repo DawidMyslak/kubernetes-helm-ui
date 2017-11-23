@@ -157,9 +157,33 @@ const actions = {
   }
 }
 
+const getters = {
+  getReleasesAndDeployments(state) {
+    return state.releases.map((release) => {
+      const deployment = state.deployments.find((deployment) => {
+        const selector = deployment.selector.split(',')
+          .map((item) => item.split('='))
+          .reduce((accumulator, item) => {
+            accumulator[item[0]] = item[1]
+            return accumulator
+          }, {}) || {}
+
+        if (selector.release) {
+          return release.name === selector.release
+        }
+
+        return release.name === selector.app
+      })
+
+      return { ...release, deployment }
+    })
+  }
+}
+
 export default new Vuex.Store({
   state,
   mutations,
   actions,
+  getters,
   strict: process.env.NODE_ENV !== 'production'
 })

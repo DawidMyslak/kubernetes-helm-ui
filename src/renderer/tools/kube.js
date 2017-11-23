@@ -20,7 +20,7 @@ export default {
   getDeployments() {
     return shell.exec(`${store.state.config.kubePath}kubectl get deployment --context="${store.state.context.name}" --namespace="${store.state.namespace.name}" -o wide`)
       .then((data) => {
-        const deployments = parsers.parseKubeData(data, ['name', 'desired', 'current', 'up-to-date', 'available', 'age', 'containers', 'images'])
+        const deployments = parsers.parseKubeData(data, ['name', 'desired', 'current', 'up-to-date', 'available', 'age', 'container', 'image', 'selector'])
         return deployments
       })
   },

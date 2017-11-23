@@ -4,7 +4,7 @@
     <navigation type="releases"></navigation>
   
     <div class="releases">
-      <div class="item" v-for="(item, index) in $store.state.releases" :key="index">
+      <div class="item" v-for="(item, index) in $store.getters.getReleasesAndDeployments" :key="index">
         <div class="item-left">
           <div class="revision">REVISION</div>
           <div class="revision-number">{{ item.revision }}</div>
@@ -16,6 +16,10 @@
               <div class="status">{{ item.status }}</div>
             </div>
             <div class="time">{{ item.updated }}</div>
+            <div class="deployment" v-if="item.deployment">
+              {{ item.deployment.age }}
+              {{ item.deployment.image }}
+            </div>
           </div>
           <div class="actions">
             <button class="button-green" @click="showHistory(item)">History</button>
