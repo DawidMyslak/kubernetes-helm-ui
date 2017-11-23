@@ -4,7 +4,7 @@
     <navigation type="releases"></navigation>
   
     <div class="releases">
-      <div class="item" v-for="(item, index) in $store.getters.getReleasesAndDeployments" :key="index">
+      <div class="item" v-for="(item, index) in $store.getters.getReleases" :key="index">
         <div class="item-left">
           <div class="revision">REVISION</div>
           <div class="revision-number">{{ item.revision }}</div>
@@ -13,12 +13,15 @@
           <div class="info">
             <div class="info-header">
               <div class="title">{{ item.name }}</div>
-              <div class="status">{{ item.status }}</div>
+              <div class="status status-orange">{{ item.status }}</div>
+              <div class="status status-grey" v-if="item.deployment">{{ item.deployment.current }} PODS RUNNING</div>
             </div>
             <div class="time">{{ item.updated }}</div>
-            <div class="deployment" v-if="item.deployment">
-              {{ item.deployment.age }}
-              {{ item.deployment.image }}
+            <div class="github">
+              <img src="~@/assets/github.svg" class="icon">
+              <span v-if="item.github" class="repository"><a :href="'https://github.com/' + item.github.repository">{{ item.github.repository }}</a></span>
+              <span v-if="item.github" class="commit"><a :href="'https://github.com/' + item.github.repository + '/commit/' + item.github.commit">{{ item.github.shortCommit }}</a></span>
+              <span v-else>No repository found</span>
             </div>
           </div>
           <div class="actions">
@@ -81,12 +84,12 @@ export default {
 .item {
   margin: 10px;
   display: flex;
-  height: 60px;
+  height: 72px;
 }
 
 .item-left {
   width: 80px;
-  padding-top: 11px;
+  padding-top: 15px;
   color: #fff;
   background: linear-gradient(#66c1eb, #3bacdf);
   border-top-left-radius: 4px;
@@ -100,13 +103,13 @@ export default {
 }
 
 .revision-number {
-  font-size: 26px;
+  font-size: 30px;
   font-weight: bold;
   text-align: center;
 }
 
 .item-right {
-  padding: 10px 15px 0 15px;
+  padding: 8px 15px 0 15px;
   background: linear-gradient(#fff, #edf1f3);
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
@@ -130,7 +133,6 @@ export default {
 
 .status {
   font-size: 10px;
-  background-color: #c9c458;
   color: #fff;
   padding: 2px 4px 0 4px;
   border-radius: 8px;
@@ -139,14 +141,57 @@ export default {
   height: 15px;
 }
 
+.status-orange {
+  background-color: #c9c458;
+}
+
+.status-grey {
+  background-color: #bbc5c7;
+}
+
 .time {
   font-size: 13px;
   color: #888;
   padding-top: 1px;
 }
 
+.github {
+  font-size: 12px;
+  color: #444;
+  padding-top: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.github a {
+  color: #444;
+  text-decoration: none;
+}
+
+.github a:hover {
+  text-decoration: underline;
+}
+
+.github img {
+  margin-right: 2px;
+}
+
+.repository {
+  margin-right: 4px;
+}
+
+.commit {
+  font-family: Menlo, monospace;
+  font-size: 11px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
 .actions {
-  padding-top: 5px;
+  padding-top: 12px;
   text-align: right;
   width: 170px;
   display: flex;

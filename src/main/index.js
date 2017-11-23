@@ -21,8 +21,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 600,
-    minWidth: 800,
-    minHeight: 400
+    minWidth: 1000,
+    minHeight: 600
   })
 
   mainWindow.loadURL(winURL)
@@ -35,7 +35,7 @@ function createWindow() {
     {
       label: "Coolbernetes",
       submenu: [
-        { label: "Check For Updates (v1.0.1)", click: () => { shell.openExternal('https://github.com/DawidMyslak/kubernetes-helm-ui/releases') } },
+        { label: "Check For Updates (v1.1.0)", click: () => { shell.openExternal('https://github.com/DawidMyslak/kubernetes-helm-ui/releases') } },
         { type: "separator" },
         { label: "Quit", accelerator: "Command+Q", click: () => { app.quit() } }
       ]

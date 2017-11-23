@@ -158,9 +158,12 @@ const actions = {
 }
 
 const getters = {
-  getReleasesAndDeployments(state) {
+  getReleases(state) {
     return state.releases.map((release) => {
-      const deployment = state.deployments.find((deployment) => {
+      let deployment = null
+      let github = null
+
+      deployment = state.deployments.find((deployment) => {
         const selector = deployment.selector.split(',')
           .map((item) => item.split('='))
           .reduce((accumulator, item) => {
@@ -175,7 +178,18 @@ const getters = {
         return release.name === selector.app
       })
 
-      return { ...release, deployment }
+      if (deployment) {
+        const image = deployment.image.split(':')
+        if (image.length === 2 && image[0].includes('/')) {
+          github = {
+            repository: image[0],
+            shortCommit: image[1].slice(0, 7),
+            commit: image[1]
+          }
+        }
+      }
+
+      return { ...release, deployment, github }
     })
   }
 }
