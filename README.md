@@ -11,7 +11,7 @@ You can rollback your apps now by simply clicking a button.
 <div align="center">
 <img
 width="800" 
-src="http://dawid.myslak.me/coolbernetes/screenshot-110.png" alt="colbernetes screenshot">
+src="http://dawid.myslak.me/coolbernetes/screenshot.png" alt="colbernetes screenshot">
 </div>
 
 ## Download
